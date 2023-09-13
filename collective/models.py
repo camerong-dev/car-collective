@@ -7,13 +7,14 @@ class Post(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='posts')
     created_on = models.DateTimeField(default=timezone.now)
-    title = models.CharField(max_length=120, default='blank')
-    manufacturer = models.CharField(max_length=120, default='blank')
-    car_model = models.CharField(max_length=180, default='blank')
-    engine_layout = models.CharField(max_length=20, default='blank')
-    engine_capacity = models.CharField(max_length=20, default='blank')
-    colour = models.CharField(max_length=30, default='blank')
-    year_of_manufacture = models.CharField(max_length=8, default='0000')
+    title = models.CharField(max_length=120)
+    manufacturer = models.CharField(max_length=120)
+    car_model = models.CharField(max_length=180)
+    engine_layout = models.CharField(max_length=20)
+    engine_capacity = models.CharField(max_length=20)
+    colour = models.CharField(max_length=30)
+    year_of_manufacture = models.CharField(max_length=8)
+    seats = models.CharField(max_length=2)
 
 
     def get_absolute_url(self):
