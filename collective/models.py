@@ -2,19 +2,27 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 
+class Shape(models.Model):
+    shape = models.CharField(max_length=80)
+
+    def __str__(self):
+        return self.shape
+
 
 class Post(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='posts')
+    shape = models.ForeignKey(
+        Shape, on_delete=models.PROTECT, default=1)
     created_on = models.DateTimeField(default=timezone.now)
     title = models.CharField(max_length=120)
     manufacturer = models.CharField(max_length=120)
     car_model = models.CharField(max_length=180)
-    engine_layout = models.CharField(max_length=20)
-    engine_capacity = models.CharField(max_length=20)
+    engine_layout = models.CharField(max_length=20, null=True, blank=True)
+    engine_capacity = models.CharField(max_length=20, null=True, blank=True)
     colour = models.CharField(max_length=30)
     year_of_manufacture = models.CharField(max_length=8)
-    seats = models.CharField(max_length=2)
+    seats = models.CharField(max_length=2, null=True, blank=True)
 
 
     def get_absolute_url(self):
@@ -45,7 +53,7 @@ class EngineLayoutOptions(models.Model):
     engine_layout = models.CharField(max_length=20)
 
     def __str__(self):
-        return self.car_model
+        return self.engine_layout
 # Allows me to filter by this at a later point
 
 
@@ -65,7 +73,7 @@ class ColourOptions(models.Model):
 # Allows me to filter by this at a later point
 
 
-class YearOfManafactureOptions(models.Model):
+class YearOfManufactureOptions(models.Model):
     year_of_manufacture = models.CharField(max_length=8)
 
     def __str__(self):
