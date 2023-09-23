@@ -16,7 +16,7 @@ function Footer() {
                             target="_blank"
                             rel="noopener"
                         >
-                            <FontAwesomeIcon icon="fa-brands fa-square-facebook" />
+                            <FontAwesomeIcon icon="fa-brands fa-square-facebook" size="xl" />
                         </Nav.Link>
                     </Col>
                     <Col xs="auto" className="nav-item">
@@ -27,7 +27,7 @@ function Footer() {
                             target="_blank"
                             rel="noopener"
                         >
-                            <FontAwesomeIcon icon="fa-brands fa-square-instagram" />
+                            <FontAwesomeIcon icon="fa-brands fa-square-instagram" size="xl" />
                         </Nav.Link>
                     </Col>
                     <Col xs="auto" className="nav-item">
@@ -38,7 +38,7 @@ function Footer() {
                             target="_blank"
                             rel="noopener"
                         >
-                            <FontAwesomeIcon icon="fa-brands fa-square-reddit" />
+                            <FontAwesomeIcon icon="fa-brands fa-square-reddit" size="xl" />
                         </Nav.Link>
                     </Col>
                     <Col xs="auto" className="nav-item">
@@ -49,7 +49,7 @@ function Footer() {
                             target="_blank"
                             rel="noopener"
                         >
-                            <FontAwesomeIcon icon="fa-brands fa-square-x-twitter" />
+                            <FontAwesomeIcon icon="fa-brands fa-square-x-twitter" size="xl" />
                         </Nav.Link>
                     </Col>
                 </Row>
