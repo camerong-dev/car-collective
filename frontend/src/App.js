@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import CollapsibleNav from './components/NavBar';
 import Footer from './components/Footer';
 import PostCards from './components/Posts';
+import LoadingSpinner from './components/LoadingSpinner';
 
 
 
@@ -29,7 +30,7 @@ function App() {
             <div>
                 <CollapsibleNav />
                 {isLoading ? (
-                    <p>Loading...</p>
+                    <LoadingSpinner />
                 ) : (
                     <PostCards data={data} />
                 )}
