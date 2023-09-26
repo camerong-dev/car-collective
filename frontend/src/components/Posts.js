@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { usePostList } from "../hooks/usePostList";
+import LoadingSpinner from "./LoadingSpinner.js";
 
 function PostCards() {
-  const { PostList } = usePostList();
+  const { PostList, isLoading } = usePostList();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!isLoading) {
+      setLoading(false);
+    }
+  }, [isLoading]);
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
   // Check if data is null
   if (!PostList || PostList.length === 0) {
