@@ -4,6 +4,11 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 function PostCards({ data }) {
+    // Check if data is null 
+    if (!data || data.length === 0) {
+        return <p>No posts available.</p>;
+    }
+
     return (
         <Row xs={1} md={2} className="g-4">
             {data.map((post, idx) => (
