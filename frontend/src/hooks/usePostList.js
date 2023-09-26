@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
+import { fetchPostList } from "../util/fetchPostList";
 
-async function usePostList() {
-    const [PostList, setPostList] = useState();
+function usePostList() {
+  const [PostList, setPostList] = useState(null);
 
-    const response = await fetch('https://8000-camerong-dev-car-collect-yhax1lcp0i.us2.codeanyapp.com/api/', { mode: 'cors', method: "GET" });
-    const data = await response.json();
-    console.log({ data });
-    setPostList(data);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await fetchPostList();
+        setPostList(data);
+      } catch (error) {
+        console.error("it's fucked mate", error);
+      }
+    };
 
-    return { PostList };
+    fetchData();
+  }, []);
+
+  return { PostList };
 }
 
-export default { usePostList };
+export { usePostList };
