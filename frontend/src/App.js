@@ -5,6 +5,7 @@ import CollapsibleNav from "./components/NavBar";
 import Footer from "./components/Footer";
 import PostCards from "./components/Posts";
 import { usePostList } from "./hooks/usePostList";
+import SignIn from "./pages/auth/SignInForm";
 
 function App() {
   const { PostList } = usePostList();
@@ -14,7 +15,12 @@ function App() {
     <BrowserRouter>
       <div>
         <CollapsibleNav />
-        <PostCards />
+        <Routes>
+          <Route path="/" element={<h1>Home Page</h1>} />
+          <Route path="signin" element={<SignIn />} />
+          <Route path="*" element={<h1>Page not found</h1>} />
+        </Routes>
+        {/* <PostCards /> */}
         <Footer />
       </div>
     </BrowserRouter>
