@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import "../../styles/SignInStyles.css";
+import GoogleButton from "react-google-button";
 
 function SignIn() {
   const [username, setUsername] = useState("");
@@ -45,6 +46,7 @@ function SignIn() {
               </Button>
             </Form.Group>
           </Form>
+
           <div className="mt-3 register-link">
             <span>Don't have an account?</span>
             <a href="/signup">Register here</a>
