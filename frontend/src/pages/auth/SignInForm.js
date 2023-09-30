@@ -45,6 +45,10 @@ function SignIn() {
               </Button>
             </Form.Group>
           </Form>
+          <div className="mt-3 register-link">
+            <span>Don't have an account?</span>
+            <a href="/signup">Register here</a>
+          </div>
         </Col>
       </Row>
     </Container>

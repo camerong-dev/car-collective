@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import PostCards from "./components/Posts";
 import { usePostList } from "./hooks/usePostList";
 import SignIn from "./pages/auth/SignInForm";
+import SignUp from "./pages/auth/SignUpForm";
 
 function App() {
   const { PostList } = usePostList();
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<h1>Home Page</h1>} />
           <Route path="signin" element={<SignIn />} />
+          <Route path="signup" element={<SignUp />} />
           <Route path="*" element={<h1>Page not found</h1>} />
         </Routes>
         {/* <PostCards /> */}
