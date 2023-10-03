@@ -1,14 +1,28 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import axios from "axios";
 
 function SignUp() {
   const [email, setEmail] = useState("");
   const [user_name, setUser_name] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Email:", email, "Username:", user_name, "Password:", password);
+
+    try {
+      const endpoint = "http://127.0.0.1:8000/api/user/signup/";
+
+      const response = await axios.post(endpoint, {
+        email: email,
+        user_name: user_name,
+        password: password,
+      });
+
+      console.log("Registration is good", response.data);
+    } catch (error) {
+      console.error("Registration error", error.response.data);
+    }
   };
 
   return (
