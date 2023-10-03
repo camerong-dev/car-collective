@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.conf import settings
 
 class Shape(models.Model):
     shape = models.CharField(max_length=80)
@@ -11,7 +12,7 @@ class Shape(models.Model):
 
 class Post(models.Model):
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='posts')
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='posts')
     shape = models.ForeignKey(
         Shape, on_delete=models.PROTECT, default=1)
     created_on = models.DateTimeField(default=timezone.now)

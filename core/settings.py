@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'collective_api',
     'rest_framework',
     'corsheaders',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -149,7 +150,10 @@ STATIC_URL = '/static/'
 REST_FRAMEWORK = {
     'DEFAULT_PERMISISON_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-    ]
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
 }
 
 # Default primary key field type
@@ -161,3 +165,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000"
 ]
+
+AUTH_USER_MODEL = "accounts.NewUser"
