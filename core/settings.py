@@ -14,6 +14,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 import dj_database_url
 import os
+from datetime import timedelta
 
 load_dotenv()
 
@@ -166,4 +167,11 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000"
 ]
 
+#Custom user model
 AUTH_USER_MODEL = "accounts.NewUser"
+
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+}
