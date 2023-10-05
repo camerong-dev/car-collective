@@ -148,8 +148,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend', 'build', 'static')]
-
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'))
 REST_FRAMEWORK = {
     'DEFAULT_PERMISISON_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
