@@ -19,4 +19,4 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     re_path(r'^.*$', views.index_view, name='index'),
-]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
