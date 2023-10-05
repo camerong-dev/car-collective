@@ -41,6 +41,7 @@ DEBUG = False
 ALLOWED_HOSTS = [
     "localhost:8000",
     "127.0.0.1",
+    "car-collective-8debc1088dd6.herokuapp.com"
 ]
 
 
@@ -147,6 +148,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend', 'build', 'static')]
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISISON_CLASSES': [
