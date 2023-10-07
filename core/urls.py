@@ -16,7 +16,7 @@ def render_react(request):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('collective.urls', namespace='collective')),
+    path('', TemplateView.as_view(template_name='index.html')),
     path('api/', include('collective_api.urls', namespace='collective_api')),
     path('api/user/', include('accounts.urls', namespace='accounts')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
