@@ -21,8 +21,6 @@ load_dotenv()
 
 CLOUDINARY_STORAGE = {
     'CLOUDINARY_URL': os.getenv('CLOUDINARY_URL'),
-    'API_KEY': os.getenv('API_KEY'),
-    'API_SECRET': os.getenv('API_SECRET'),
 }
 MEDIA_URL = 'car-collective/media/'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
@@ -149,7 +147,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = 'car-collective/static/'
+STATIC_URL = 'https://res.cloudinary.com/dvb3baxxt/car-collective/static/'
 STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'frontend/build/static'), ]
 
