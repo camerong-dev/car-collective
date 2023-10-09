@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import "../../styles/UserForms.css";
-import axios from "axios";
+import axiosInstance from "../../api/axiosDefaults";
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -14,10 +14,8 @@ function SignUp() {
     setErrorMessage("");
 
     try {
-      const endpoint = "http://127.0.0.1:8000/api/user/signup/";
-
-      const response = await axios.post(
-        endpoint,
+      const response = await axiosInstance.post(
+        "user/signup/",
         {
           email: email,
           user_name: user_name,
@@ -98,6 +96,7 @@ function SignUp() {
 
           <div className="mt-3 register-link">
             <span>Already have an account?</span>
+            <br />
             <a href="/signin">Sign in here</a>
           </div>
         </Col>

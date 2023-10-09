@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import "../../styles/UserForms.css";
-import axios from "axios";
-/// import { useHistory } from "react-router-dom";
-
-const axiosInstance = axios.create({
-  baseURL: "http://127.0.0.1:8000/api",
-});
+import axiosInstance from "../../api/axiosDefaults";
+//import { useHistory } from "react-router-dom";
 
 function SignIn() {
-  const [user_name, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   /// const history = useHistory();
 
@@ -17,17 +13,18 @@ function SignIn() {
     e.preventDefault();
 
     axiosInstance
-      .post("http://127.0.0.1:8000/api/signin/", {
-        user_name: user_name,
+      .post("token/", {
+        email: email,
         password: password,
       })
       .then((token) => {
         localStorage.setItem("access_token", token.data.access);
         localStorage.setItem("refresh_token", token.data.refresh);
+        axiosInstance.defaults.headers["Authorization"] =
+          "JWT" + localStorage.getItem("access_token");
 
-        /// history.push("/");
+        //history.push("/");
       })
-      // Handle form submission logic here
       .catch((error) => {
         console.error("Login error:", error);
       });
@@ -38,13 +35,13 @@ function SignIn() {
       <Row>
         <Col md={{ span: 6, offset: 3 }}>
           <Form onSubmit={handleSubmit} className="form">
-            <Form.Group controlId="formUsername" className="item">
-              <Form.Label>Username</Form.Label>
+            <Form.Group controlId="formEmail" className="item">
+              <Form.Label>Email</Form.Label>
               <Form.Control
-                type="text"
-                placeholder="Enter username"
-                value={user_name}
-                onChange={(e) => setUsername(e.target.value)}
+                type="email"
+                placeholder="Enter email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </Form.Group>
@@ -69,6 +66,7 @@ function SignIn() {
 
           <div className="mt-3 register-link">
             <span>Don't have an account?</span>
+            <br />
             <a href="/signup">Register here</a>
           </div>
         </Col>

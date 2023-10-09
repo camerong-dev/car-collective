@@ -170,7 +170,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
-    'EXCEPTION_HANDLER': 'rest_framework.views.exception_hander',
+    'EXCEPTION_HANDLER': 'rest_framework.views.exception_handler',
 }
 
 # Default primary key field type
