@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import "../../styles/UserForms.css";
 import axiosInstance from "../../api/axiosDefaults";
-//import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  /// const history = useHistory();
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,10 +24,24 @@ function SignIn() {
         axiosInstance.defaults.headers["Authorization"] =
           "JWT" + localStorage.getItem("access_token");
 
-        //history.push("/");
+        navigate("/");
       })
       .catch((error) => {
         console.error("Login error:", error);
+
+        if (error.response && error.response.data) {
+          if (error.response.data.email) {
+            setError(
+              "Sorry no account with that email could be found. Please try again."
+            );
+          } else if (error.response.data.password) {
+            setError("Sorry that password is incorrect. Please try again.");
+          } else {
+            setError("The email or password you entered is incorrect.");
+          }
+        } else {
+          setError("The email or password you entered is incorrect.");
+        }
       });
   };
 
@@ -34,6 +49,7 @@ function SignIn() {
     <Container className="mt-5 registration-form">
       <Row>
         <Col md={{ span: 6, offset: 3 }}>
+          {error && <p className="alert alert-danger">{error}</p>}
           <Form onSubmit={handleSubmit} className="form">
             <Form.Group controlId="formEmail" className="item">
               <Form.Label>Email</Form.Label>
