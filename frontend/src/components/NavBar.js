@@ -4,6 +4,11 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { NavLink } from "react-router-dom";
+import { logoutUser } from "./Logout";
+
+const handleLogoutClick = () => {
+  logoutUser();
+};
 
 function CollapsibleNav() {
   return (
@@ -13,7 +18,7 @@ function CollapsibleNav() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#features">#</Nav.Link>
+            <Nav.Link onClick={handleLogoutClick}>Log Out</Nav.Link>
             <Nav.Link href="#pricing">#</Nav.Link>
             <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>

@@ -60,7 +60,8 @@ INSTALLED_APPS = [
     'collective_api',
     'rest_framework',
     'corsheaders',
-    'accounts'
+    'accounts',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 
 MIDDLEWARE = [
@@ -188,4 +189,5 @@ AUTH_USER_MODEL = "accounts.NewUser"
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "BLACKLIST_AFTER_ROTATION": True,
 }

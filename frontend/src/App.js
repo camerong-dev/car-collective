@@ -17,12 +17,11 @@ function App() {
       <div>
         <CollapsibleNav />
         <Routes>
-          <Route path="/" element={<h1>Home Page</h1>} />
+          <Route path="/" element={<PostCards />} />
           <Route path="signin" element={<SignIn />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="*" element={<h1>Page not found</h1>} />
         </Routes>
-        {/* <PostCards /> */}
         <Footer />
       </div>
     </BrowserRouter>
