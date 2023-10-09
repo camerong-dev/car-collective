@@ -1,16 +1,36 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
-import "../../styles/SignInStyles.css";
-import GoogleButton from "react-google-button";
+import "../../styles/UserForms.css";
+import axios from "axios";
+/// import { useHistory } from "react-router-dom";
+
+const axiosInstance = axios.create({
+  baseURL: "http://127.0.0.1:8000/api",
+});
 
 function SignIn() {
-  const [username, setUsername] = useState("");
+  const [user_name, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  /// const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log("Username: ", username, "Password: ", password);
+
+    axiosInstance
+      .post("http://127.0.0.1:8000/api/signin/", {
+        user_name: user_name,
+        password: password,
+      })
+      .then((token) => {
+        localStorage.setItem("access_token", token.data.access);
+        localStorage.setItem("refresh_token", token.data.refresh);
+
+        /// history.push("/");
+      })
+      // Handle form submission logic here
+      .catch((error) => {
+        console.error("Login error:", error);
+      });
   };
 
   return (
@@ -23,7 +43,7 @@ function SignIn() {
               <Form.Control
                 type="text"
                 placeholder="Enter username"
-                value={username}
+                value={user_name}
                 onChange={(e) => setUsername(e.target.value)}
                 required
               />

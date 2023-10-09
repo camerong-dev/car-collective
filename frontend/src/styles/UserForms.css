@@ -32,17 +32,6 @@
   color: white;
 }
 
-.google-button button {
-  width: 100%;
-  border-radius: 30px;
-  padding: 10px 20px;
-  font-size: 18px;
-  font-weight: bold;
-  background-color: #5891ff;
-  border: none;
-  color: white;
-}
-
 .register-link {
   margin-top: 20px;
   text-align: center;
@@ -57,6 +46,16 @@
 
 .register-link a:hover {
   text-decoration: underline;
+}
+
+.alert-danger {
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+  background-color: #f8d7da;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 @media (max-width: 576px) {
