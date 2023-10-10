@@ -7,6 +7,7 @@ import { usePostList } from "../hooks/usePostList";
 import LoadingSpinner from "./LoadingSpinner.js";
 import "../styles/PostCards.css";
 import PaginationComponent from "./PaginationComponent";
+import { Link } from "react-router-dom";
 
 function PostCards() {
   const { PostList, isLoading } = usePostList();
@@ -49,19 +50,23 @@ function PostCards() {
                   key={idx}
                 >
                   <Card className="post-card" style={{ marginBottom: "20px" }}>
-                    <Card.Img
-                      variant="top"
-                      src={"holder.js/100px180?text=Image cap"}
-                    />
-                    <Card.Body>
-                      <Card.Title>{post.title}</Card.Title>
-                      <Card.Text>Filler text</Card.Text>
-                    </Card.Body>
-                    <ListGroup className="list-group-flush">
-                      <ListGroup.Item>{post.car_model}</ListGroup.Item>
-                      <ListGroup.Item>{post.manufacturer}</ListGroup.Item>
-                      <ListGroup.Item>{post.colour}</ListGroup.Item>
-                    </ListGroup>
+                    <Link to={`/post/${post.id}`} className="card-link-body">
+                      <Card.Img
+                        variant="top"
+                        src={"holder.js/100px180?text=Image cap"}
+                      />
+                      <Card.Body>
+                        <Card.Title>{post.title}</Card.Title>
+                        <Card.Text>{post.id}</Card.Text>
+                      </Card.Body>
+                      <ListGroup className="list-group-flush">
+                        <ListGroup.Item>{post.car_model}</ListGroup.Item>
+                        <ListGroup.Item>{post.manufacturer}</ListGroup.Item>
+                        <ListGroup.Item>
+                          {post.year_of_manufacture}
+                        </ListGroup.Item>
+                      </ListGroup>
+                    </Link>
                     <Card.Body>
                       <Card.Link href="#">Card Link</Card.Link>
                       <Card.Link href="#">Another Link</Card.Link>

@@ -27,7 +27,7 @@ class Post(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse('post-details', kwargs={"pk": self.id})
+        return reverse('post-id', kwargs={"pk": self.id})
     # Provides a specific key to be able to search for
 
     def __str__(self):
