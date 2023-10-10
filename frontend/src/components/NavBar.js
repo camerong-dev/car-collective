@@ -5,22 +5,29 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { NavLink } from "react-router-dom";
 import { logoutUser } from "./Logout";
-import jwtDecode from "jsonwebtoken/decode";
+
+function isLoggedIn() {
+  return !!localStorage.getItem("access_token");
+}
 
 function CollapsibleNav() {
-  const [userName, setUserName] = useState(null);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(isLoggedIn());
 
   useEffect(() => {
-    if (isLoggedIn()) {
-      const token = localStorage.getItem("access_token");
-      const decodedToken = jwtDecode(token);
-      setUserName(decodedToken.user_name);
-    }
+    const updateLoginStatus = () => {
+      setIsUserLoggedIn(isLoggedIn());
+    };
+
+    window.addEventListener("userLoggedOut", updateLoginStatus);
+    updateLoginStatus();
+    return () => {
+      window.removeEventListener("userLoggedOut", updateLoginStatus);
+    };
   }, []);
 
   const handleLogoutClick = () => {
     logoutUser();
-    setUserName(null);
+    setIsUserLoggedIn(false);
   };
 
   return (
@@ -45,9 +52,9 @@ function CollapsibleNav() {
             </NavDropdown>
           </Nav>
           <Nav>
-            {isLoggedIn() ? (
+            {isUserLoggedIn ? (
               <NavDropdown
-                title={userName || "Loading..."}
+                title={"Welcome back!"}
                 id="collapsible-nav-dropdown"
               >
                 <NavDropdown.Item onClick={handleLogoutClick}>
@@ -62,10 +69,6 @@ function CollapsibleNav() {
       </Container>
     </Navbar>
   );
-}
-
-function isLoggedIn() {
-  return !!localStorage.getItem("access_token");
 }
 
 export default CollapsibleNav;

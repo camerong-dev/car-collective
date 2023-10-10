@@ -4,6 +4,7 @@ import "../../styles/UserForms.css";
 import axiosInstance from "../../api/axiosDefaults";
 
 function SignUp() {
+  const [first_name, setFirst_name] = useState("");
   const [email, setEmail] = useState("");
   const [user_name, setUser_name] = useState("");
   const [password, setPassword] = useState("");
@@ -20,6 +21,7 @@ function SignUp() {
           email: email,
           user_name: user_name,
           password: password,
+          first_name: first_name,
         },
         {
           headers: {
@@ -53,9 +55,31 @@ function SignUp() {
           {errorMessage && (
             <div className="alert alert-danger">{errorMessage}</div>
           )}
+          <Form.Group controlId="formFirstName" className="item">
+            <Form.Label>First Name:</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter first name"
+              value={first_name}
+              onChange={(e) => setFirst_name(e.target.value)}
+              required
+            />
+          </Form.Group>
+
+          <Form.Group controlId="formUsername" className="item">
+            <Form.Label>Username:</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter username"
+              value={user_name}
+              onChange={(e) => setUser_name(e.target.value)}
+              required
+            />
+          </Form.Group>
+
           <Form onSubmit={handleSubmit} className="form">
             <Form.Group controlId="formEmail" className="item">
-              <Form.Label>Email Address</Form.Label>
+              <Form.Label>Email Address:</Form.Label>
               <Form.Control
                 type="email"
                 placeholder="Enter email"
@@ -65,19 +89,8 @@ function SignUp() {
               />
             </Form.Group>
 
-            <Form.Group controlId="formUsername" className="item">
-              <Form.Label>Username</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter username"
-                value={user_name}
-                onChange={(e) => setUser_name(e.target.value)}
-                required
-              />
-            </Form.Group>
-
             <Form.Group controlId="formPassword" className="item">
-              <Form.Label>Password</Form.Label>
+              <Form.Label>Password:</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Password"
