@@ -11,6 +11,7 @@ import PostDetail from "./components/PostDetail";
 import jwtDecode from "jsonwebtoken/decode";
 import fetchUsername from "./util/fetchUsername";
 import { logoutUser } from "./components/Logout";
+import CreatePost from "./pages/CreatePost";
 
 function App() {
   const { PostList } = usePostList();
@@ -68,6 +69,7 @@ function App() {
           <Route path="/post/:id" element={<PostDetail />} />
           <Route path="signin" element={<SignIn onLogin={handleLogin} />} />
           <Route path="signup" element={<SignUp />} />
+          <Route path="newpost" element={<CreatePost />} />
           <Route path="*" element={<h1>Page not found</h1>} />
         </Routes>
         <Footer />

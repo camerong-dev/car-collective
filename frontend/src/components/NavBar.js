@@ -12,7 +12,7 @@ function CollapsibleNav({ isUserLoggedIn, userName, handleLogout }) {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            {isUserLoggedIn && <Nav.Link href="#">Create Post</Nav.Link>}
+            {isUserLoggedIn && <Nav.Link href="/newpost">Create Post</Nav.Link>}
           </Nav>
           <Nav>
             {isUserLoggedIn ? (
