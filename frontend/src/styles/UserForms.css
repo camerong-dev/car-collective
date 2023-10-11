@@ -58,6 +58,16 @@
   text-align: center;
 }
 
+.alert-sucess {
+  border: 1px solid #d6e9c6;
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
 @media (max-width: 576px) {
   .registration-form {
     padding: 50px 20px;

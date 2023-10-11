@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import "../../styles/UserForms.css";
 import axiosInstance from "../../api/axiosDefaults";
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
   const [first_name, setFirst_name] = useState("");
@@ -9,10 +10,12 @@ function SignUp() {
   const [user_name, setUser_name] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("");
+    setSuccessMessage("");
 
     try {
       const response = await axiosInstance.post(
@@ -32,6 +35,12 @@ function SignUp() {
       );
 
       console.log("Registration is good", response.data);
+      setSuccessMessage("Registration was successful! Please sign in.");
+
+      setFirst_name("");
+      setEmail("");
+      setUser_name("");
+      setPassword("");
     } catch (error) {
       console.error("Registration error", error.response.data);
       if (error.response && error.response.data) {
@@ -54,6 +63,9 @@ function SignUp() {
         <Col md={{ span: 6, offset: 3 }}>
           {errorMessage && (
             <div className="alert alert-danger">{errorMessage}</div>
+          )}
+          {successMessage && (
+            <div className="alert alert-sucess">{successMessage}</div>
           )}
           <Form.Group controlId="formFirstName" className="item">
             <Form.Label>First Name:</Form.Label>
