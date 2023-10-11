@@ -8,19 +8,48 @@ import { usePostList } from "./hooks/usePostList";
 import SignIn from "./pages/auth/SignInForm";
 import SignUp from "./pages/auth/SignUpForm";
 import PostDetail from "./components/PostDetail";
+import jwtDecode from "jsonwebtoken/decode";
+import fetchUsername from "./util/fetchUsername";
+import { logoutUser } from "./components/Logout";
 
 function App() {
   const { PostList } = usePostList();
-  console.log(PostList);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [userName, setUserName] = useState("");
+  const [user_id, setUserId] = useState(null);
+
+  const handleLogin = (token) => {
+    const decodedToken = jwtDecode(token);
+    setIsUserLoggedIn(true);
+    setUserId(decodedToken.user_id);
+    fetchUsername(decodedToken.user_id)
+      .then((username) => {
+        setUserName(username);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const handleLogout = () => {
+    logoutUser();
+    setUserId(null);
+    setUserName("");
+    setIsUserLoggedIn(false);
+  };
 
   return (
     <BrowserRouter>
       <div>
-        <CollapsibleNav />
+        <CollapsibleNav
+          isUserLoggedIn={isUserLoggedIn}
+          userName={userName}
+          onLogout={handleLogout}
+        />
         <Routes>
           <Route path="/" element={<PostCards />} />
           <Route path="/post/:id" element={<PostDetail />} />
-          <Route path="signin" element={<SignIn />} />
+          <Route path="signin" element={<SignIn onLogin={handleLogin} />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="*" element={<h1>Page not found</h1>} />
         </Routes>

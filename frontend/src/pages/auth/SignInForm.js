@@ -4,7 +4,7 @@ import "../../styles/UserForms.css";
 import axiosInstance from "../../api/axiosDefaults";
 import { useNavigate } from "react-router-dom";
 
-function SignIn() {
+function SignIn({ onLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -23,7 +23,7 @@ function SignIn() {
         localStorage.setItem("refresh_token", token.data.refresh);
         axiosInstance.defaults.headers["Authorization"] =
           "JWT" + localStorage.getItem("access_token");
-
+        onLogin(token.data.access);
         navigate("/");
       })
       .catch((error) => {
