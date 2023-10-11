@@ -38,13 +38,30 @@ function App() {
     setIsUserLoggedIn(false);
   };
 
+  useEffect(() => {
+    const token = localStorage.getItem("access_token");
+
+    if (token) {
+      const decodedToken = jwtDecode(token);
+      setIsUserLoggedIn(true);
+      setUserId(decodedToken.user_id);
+      fetchUsername(decodedToken.user_id)
+        .then((username) => {
+          setUserName(username);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, []);
+
   return (
     <BrowserRouter>
       <div>
         <CollapsibleNav
           isUserLoggedIn={isUserLoggedIn}
           userName={userName}
-          onLogout={handleLogout}
+          handleLogout={handleLogout}
         />
         <Routes>
           <Route path="/" element={<PostCards />} />
