@@ -34,3 +34,6 @@ class UserSerializer(serializers.ModelSerializer):
         except IntegrityError:
             raise serializers.ValidationError({"detail": "User with this email or username already exists."})
 
+
+class UsernameSerializer(serializers.Serializer):
+    user_name = serializers.CharField()

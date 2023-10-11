@@ -1,9 +1,10 @@
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
-from .serializers import UserSerializer
+from .serializers import UserSerializer, UsernameSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
+from django.contrib.auth import get_user_model
 
 
 class UserCreate(APIView):
@@ -31,3 +32,17 @@ class BlacklistTokenUpdateView(APIView):
             return Response(status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
+        
+
+class GetUserNameFromId(APIView):
+    def get(self, request, user_id):
+        User = get_user_model()
+        try:
+            user = User.objects.get(id=user_id)
+            username = user.user_name
+            serializer = UsernameSerializer({'user_name': username})
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except User.DoesNotExist:
+            print("User not found")
+            return Response({'error': 'User not found'},
+status=status.HTTP_404_NOT_FOUND)
