@@ -1,9 +1,8 @@
-import React from "react";
-import axios from "axios";
+import axiosInstance from "../api/axiosDefaults";
 
 async function fetchPostList() {
   try {
-    const response = await axios.get("http://127.0.0.1:8000/api/", {
+    const response = await axiosInstance.get("posts/", {
       mode: "cors",
       method: "GET",
     });

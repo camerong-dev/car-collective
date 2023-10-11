@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchPostList } from "../util/fetchPostList";
 
 function usePostList() {
@@ -10,7 +10,7 @@ function usePostList() {
         const data = await fetchPostList();
         setPostList(data);
       } catch (error) {
-        console.error("it's fucked mate", error);
+        console.error("An error occurred:", error);
       }
     };
 

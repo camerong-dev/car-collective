@@ -10,7 +10,7 @@ function PostDetail() {
 
   useEffect(() => {
     axiosInstance
-      .get(`post/${id}`)
+      .get(`posts/${id}/`)
       .then((response) => {
         setPost(response.data);
         setLoading(false);
