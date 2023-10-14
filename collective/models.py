@@ -3,24 +3,18 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.conf import settings
 
-class Shape(models.Model):
+
+class Post(models.Model):
+    GEARBOX_CHOICES = [
+        ('manual', 'Manual'),
+        ('automatic', 'Automatic'),
+    ]
     SHAPE_CHOICES = [
         ('hatchback', 'Hatchback'),
         ('saloon', 'Saloon'),
         ('estate', 'Estate'),
         ('suv', 'SUV'),
         ('convertible', 'Convertible'),
-    ]
-    shape = models.CharField(max_length=20, choices=SHAPE_CHOICES)
-
-    def __str__(self):
-        return self.shape
-
-
-class Post(models.Model):
-    GEARBOX_CHOICES = [
-        ('manual', 'Manual'),
-        ('automatic', 'Automatic'),
     ]
     FUEL_TYPE_CHOICES = [
         ('petrol', 'Petrol'),
@@ -35,8 +29,7 @@ class Post(models.Model):
     ]
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='posts')
-    shape = models.ForeignKey(
-        Shape, on_delete=models.PROTECT)
+    shape = models.CharField(max_length=20, choices=SHAPE_CHOICES)
     created_on = models.DateTimeField(default=timezone.now)
     title = models.CharField(max_length=120)
     manufacturer = models.CharField(max_length=120)

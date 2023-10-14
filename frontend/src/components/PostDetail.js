@@ -32,7 +32,11 @@ function PostDetail() {
     <Container>
       <Row className="mb-4">
         <Col md={8}>
-          <div className="carousel-placeholder"></div>
+          <img
+            className="carousel-placeholder"
+            src={post.image_1}
+            alt="Post Image 1"
+          />
         </Col>
 
         <Col md={4} className="data-col">
@@ -53,27 +57,32 @@ function PostDetail() {
             <Col>{post.engine_capacity}</Col>
           </Row>
           <Row className="mb-2">
-            <Col>gearbox</Col>
-            <Col>wheel drive</Col>
+            <Col>{post.gearbox}</Col>
+            <Col>{post.drivetrain}</Col>
           </Row>
           <br />
           <Row className="mb-2">
             <Col>Mods:</Col>
           </Row>
           <Row className="mb-2">
-            <Col>Mod title 1:</Col>
+            <Col>{post.mod_title_1}</Col>
+            <Col>{post.mod_description_1}</Col>
           </Row>
           <Row className="mb-2">
-            <Col>Mod title 2:</Col>
+            <Col>{post.mod_title_2}</Col>
+            <Col>{post.mod_description_2}</Col>
           </Row>
           <Row className="mb-2">
-            <Col>Mod title 3:</Col>
+            <Col>{post.mod_title_3}</Col>
+            <Col>{post.mod_description_3}</Col>
           </Row>
           <Row className="mb-2">
-            <Col>Mod title 4:</Col>
+            <Col>{post.mod_title_4}</Col>
+            <Col>{post.mod_description_4}</Col>
           </Row>
           <Row className="mb-2">
-            <Col>Mod title 5:</Col>
+            <Col>{post.mod_title_5}</Col>
+            <Col>{post.mod_description_5}</Col>
           </Row>
         </Col>
       </Row>
