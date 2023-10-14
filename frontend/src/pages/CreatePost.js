@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axiosInstance from "../api/axiosDefaults";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import "../styles/UserForms.css";
+import { isTokenExpired } from "../util/isTokenExpired";
 
 function CreatePost() {
   const [formData, setFormData] = useState({
@@ -28,7 +29,16 @@ function CreatePost() {
     error.preventDefault();
 
     try {
-      const response = await axiosInstance.post("create/", formData);
+      if (isTokenExpired(localStorage.getItem("access_token"))) {
+        await axiosInstance.get("user/get_username/");
+      }
+      const response = await axiosInstance.post("create/", formData, {
+        headers: {
+          Authorization: localStorage.getItem("access_token")
+            ? "Bearer " + localStorage.getItem("access_token")
+            : null,
+        },
+      });
       console.log(response.data);
     } catch (error) {
       console.error("Error posting:", error);

@@ -10,7 +10,13 @@ function PostDetail() {
 
   useEffect(() => {
     axiosInstance
-      .get(`posts/${id}/`)
+      .get(`posts/${id}/`, {
+        headers: {
+          Authorization: localStorage.getItem("access_token")
+            ? "JWT " + localStorage.getItem("access_token")
+            : null,
+        },
+      })
       .then((response) => {
         setPost(response.data);
         setLoading(false);
