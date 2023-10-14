@@ -37,16 +37,43 @@ function PostDetail() {
 
         <Col md={4} className="data-col">
           <Row className="mb-2">
-            <Col>{post.title}</Col>
+            <Col>
+              <strong>{post.title}</strong>
+            </Col>
+          </Row>
+          <Row className="mb-2">
             <Col>{post.author}</Col>
           </Row>
           <Row className="mb-2">
-            <Col>more data</Col>
-            <Col>more date</Col>
+            <Col>{post.manufacturer}</Col>
+            <Col>{post.car_model}</Col>
           </Row>
           <Row className="mb-2">
-            <Col>more data</Col>
-            <Col>more date</Col>
+            <Col>{post.engine_layout}</Col>
+            <Col>{post.engine_capacity}</Col>
+          </Row>
+          <Row className="mb-2">
+            <Col>gearbox</Col>
+            <Col>wheel drive</Col>
+          </Row>
+          <br />
+          <Row className="mb-2">
+            <Col>Mods:</Col>
+          </Row>
+          <Row className="mb-2">
+            <Col>Mod title 1:</Col>
+          </Row>
+          <Row className="mb-2">
+            <Col>Mod title 2:</Col>
+          </Row>
+          <Row className="mb-2">
+            <Col>Mod title 3:</Col>
+          </Row>
+          <Row className="mb-2">
+            <Col>Mod title 4:</Col>
+          </Row>
+          <Row className="mb-2">
+            <Col>Mod title 5:</Col>
           </Row>
         </Col>
       </Row>
@@ -54,7 +81,21 @@ function PostDetail() {
       <Row className="mb-4 description-section">
         <Col md={8}>
           <h4>Description:</h4>
-          <p>placeholder text...</p>
+          <p>
+            placeholder text...placeholder text...placeholder text...placeholder
+            text...placeholder text...placeholder text...placeholder
+            text...placeholder text...placeholder text...placeholder
+            text...placeholder text...placeholder text...placeholder
+            text...placeholder text...placeholder text...placeholder
+            text...placeholder text...placeholder text...placeholder
+            text...placeholder text...placeholder text...placeholder
+            text...placeholder text...placeholder text...placeholder
+            text...placeholder text...placeholder text...placeholder
+            text...placeholder text...placeholder text...placeholder
+            text...placeholder text...placeholder text...placeholder
+            text...placeholder text...placeholder text...placeholder
+            text...placeholder text...placeholder text...
+          </p>
         </Col>
 
         <Col md={4} className="comments-section">
