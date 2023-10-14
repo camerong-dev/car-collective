@@ -3,6 +3,8 @@ from collective.models import Post
 
 
 class PostSerializer(serializers.ModelSerializer):
+    author = serializers.PrimaryKeyRelatedField(queryset=Post.author.field.related_model.objects.all(), required=False)
+    
     class Meta:
         model = Post
         fields = [

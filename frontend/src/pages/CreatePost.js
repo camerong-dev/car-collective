@@ -6,11 +6,12 @@ import "../styles/UserForms.css";
 function CreatePost() {
   const [formData, setFormData] = useState({
     title: "",
+    author: "",
     manufacturer: "",
     car_model: "",
     engine_layout: "",
     engine_capacity: "",
-    color: "",
+    colour: "",
     year_of_manufacture: "",
   });
 
@@ -27,7 +28,7 @@ function CreatePost() {
     error.preventDefault();
 
     try {
-      const response = await axiosInstance.post("posts/", formData);
+      const response = await axiosInstance.post("create/", formData);
       console.log(response.data);
     } catch (error) {
       console.error("Error posting:", error);
@@ -48,6 +49,7 @@ function CreatePost() {
                 placeholder="Enter a Title"
                 value={formData.title}
                 onChange={handleChange}
+                name="title"
                 required
               />
             </Form.Group>
@@ -59,6 +61,7 @@ function CreatePost() {
                 placeholder="Enter a Manufacturer"
                 value={formData.manufacturer}
                 onChange={handleChange}
+                name="manufacturer"
                 required
               />
             </Form.Group>
@@ -70,6 +73,7 @@ function CreatePost() {
                 placeholder="Enter the Model"
                 value={formData.car_model}
                 onChange={handleChange}
+                name="car_model"
                 required
               />
             </Form.Group>
@@ -81,6 +85,7 @@ function CreatePost() {
                 placeholder="Enter the Engine Layout"
                 value={formData.engine_layout}
                 onChange={handleChange}
+                name="engine_layout"
                 required
               />
             </Form.Group>
@@ -92,17 +97,19 @@ function CreatePost() {
                 placeholder="Enter the Engine Capacity"
                 value={formData.engine_capacity}
                 onChange={handleChange}
+                name="engine_capacity"
                 required
               />
             </Form.Group>
 
-            <Form.Group controlId="formColor" className="item">
-              <Form.Label>Color</Form.Label>
+            <Form.Group controlId="formColour" className="item">
+              <Form.Label>Colour</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter the Color"
-                value={formData.color}
+                placeholder="Enter the Colour"
+                value={formData.colour}
                 onChange={handleChange}
+                name="colour"
                 required
               />
             </Form.Group>
@@ -114,6 +121,7 @@ function CreatePost() {
                 placeholder="Enter the year it was made"
                 value={formData.year_of_manufacture}
                 onChange={handleChange}
+                name="year_of_manufacture"
                 required
               />
             </Form.Group>
