@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axiosInstance from "../api/axiosDefaults";
-import { Container, Row, Col, Carousel } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Carousel,
+  CarouselItem,
+  Modal,
+} from "react-bootstrap";
 import "../styles/PostDetail.css";
 
 function PostDetail() {
@@ -9,6 +16,8 @@ function PostDetail() {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [currentImg, setCurrentImg] = useState("");
 
   useEffect(() => {
     axiosInstance
@@ -30,13 +39,44 @@ function PostDetail() {
 
   return (
     <Container>
+      <Modal
+        size="lg"
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        centered
+      >
+        <Modal.Body>
+          <img
+            src={currentImg}
+            alt="Full Size Image"
+            style={{ width: "100%", height: "auto" }}
+          />
+        </Modal.Body>
+      </Modal>
       <Row className="mb-4">
         <Col md={8}>
-          <img
-            className="carousel-placeholder"
-            src={post.image_1}
-            alt="Post Image 1"
-          />
+          <Carousel>
+            {[
+              post.image_1,
+              post.image_2,
+              post.image_3,
+              post.image_4,
+              post.image_5,
+            ].map((img, index) => (
+              <Carousel.Item key={index}>
+                <img
+                  className="d-block w-100"
+                  style={{ borderRadius: "10px" }} // Adding rounded corners
+                  src={img}
+                  alt={`Post Image ${index + 1}`}
+                  onClick={() => {
+                    setCurrentImg(img);
+                    setShowModal(true);
+                  }}
+                />
+              </Carousel.Item>
+            ))}
+          </Carousel>
         </Col>
 
         <Col md={4} className="data-col">

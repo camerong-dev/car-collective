@@ -48,10 +48,7 @@ function PostCards() {
           >
             <Card className="post-card" style={{ marginBottom: "20px" }}>
               <Link to={`/post/${post.id}`} className="card-link-body">
-                <Card.Img
-                  variant="top"
-                  src={"holder.js/100px180?text=Image cap"}
-                />
+                <Card.Img variant="top" src={post.image_1} />
                 <Card.Body>
                   <Card.Title>{post.title}</Card.Title>
                   <Card.Text>{post.id}</Card.Text>
