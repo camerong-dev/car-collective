@@ -37,44 +37,37 @@ function PostCards() {
   return (
     <div className="postcards-container">
       <Row>
-        {[...Array(2)].map((_, rowIndex) => (
-          <Row key={rowIndex}>
-            {currentPosts
-              .slice(rowIndex * 3, rowIndex * 3 + 3)
-              .map((post, idx) => (
-                <Col
-                  lg={4}
-                  md={6}
-                  sm={12}
-                  className="d-flex justify-content-center"
-                  key={idx}
-                >
-                  <Card className="post-card" style={{ marginBottom: "20px" }}>
-                    <Link to={`/post/${post.id}`} className="card-link-body">
-                      <Card.Img
-                        variant="top"
-                        src={"holder.js/100px180?text=Image cap"}
-                      />
-                      <Card.Body>
-                        <Card.Title>{post.title}</Card.Title>
-                        <Card.Text>{post.id}</Card.Text>
-                      </Card.Body>
-                      <ListGroup className="list-group-flush">
-                        <ListGroup.Item>{post.car_model}</ListGroup.Item>
-                        <ListGroup.Item>{post.manufacturer}</ListGroup.Item>
-                        <ListGroup.Item>
-                          {post.year_of_manufacture}
-                        </ListGroup.Item>
-                      </ListGroup>
-                    </Link>
-                    <Card.Body>
-                      <Card.Link href="#">Card Link</Card.Link>
-                      <Card.Link href="#">Another Link</Card.Link>
-                    </Card.Body>
-                  </Card>
-                </Col>
-              ))}
-          </Row>
+        {currentPosts.map((post, idx) => (
+          <Col
+            xl={4}
+            lg={6}
+            md={6}
+            sm={12}
+            className="d-flex justify-content-center"
+            key={idx}
+          >
+            <Card className="post-card" style={{ marginBottom: "20px" }}>
+              <Link to={`/post/${post.id}`} className="card-link-body">
+                <Card.Img
+                  variant="top"
+                  src={"holder.js/100px180?text=Image cap"}
+                />
+                <Card.Body>
+                  <Card.Title>{post.title}</Card.Title>
+                  <Card.Text>{post.id}</Card.Text>
+                </Card.Body>
+                <ListGroup className="list-group-flush">
+                  <ListGroup.Item>{post.car_model}</ListGroup.Item>
+                  <ListGroup.Item>{post.manufacturer}</ListGroup.Item>
+                  <ListGroup.Item>{post.year_of_manufacture}</ListGroup.Item>
+                </ListGroup>
+              </Link>
+              <Card.Body>
+                <Card.Link href="#">Card Link</Card.Link>
+                <Card.Link href="#">Another Link</Card.Link>
+              </Card.Body>
+            </Card>
+          </Col>
         ))}
       </Row>
       <div className="pagiantion-container d-flex justify-content-center">
