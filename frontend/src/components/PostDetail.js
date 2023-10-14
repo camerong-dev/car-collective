@@ -37,6 +37,14 @@ function PostDetail() {
   if (error) return <div>{error.message}</div>;
   if (!post) return <div>No post found</div>;
 
+  const validImages = [
+    post.image_1,
+    post.image_2,
+    post.image_3,
+    post.image_4,
+    post.image_5,
+  ].filter((img) => img);
+
   return (
     <Container>
       <Modal
@@ -56,13 +64,7 @@ function PostDetail() {
       <Row className="mb-4">
         <Col md={8}>
           <Carousel>
-            {[
-              post.image_1,
-              post.image_2,
-              post.image_3,
-              post.image_4,
-              post.image_5,
-            ].map((img, index) => (
+            {validImages.map((img, index) => (
               <Carousel.Item key={index}>
                 <img
                   className="d-block w-100"

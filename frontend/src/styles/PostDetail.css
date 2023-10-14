@@ -45,3 +45,15 @@
 .comments-section div:last-child {
   border-bottom: none;
 }
+
+@media (max-width: 768px) {
+  .carousel-item img {
+    max-height: 300px;
+  }
+}
+
+@media (max-width: 576px) {
+  .carousel-item img {
+    max-height: 200px;
+  }
+}
