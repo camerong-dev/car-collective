@@ -72,26 +72,25 @@ function CreatePost() {
   };
 
   const handleImageChange = (a) => {
-    console.log(a.target.files[0]);
+    const file = a.target.files[0];
+    const name = a.target.name;
+    console.log("File: ", file, "Name: ", name);
     setFormData((prevState) => ({
       ...prevState,
-      [a.target.name]: a.target.files[0],
+      [name]: file,
     }));
   };
 
   const handleSubmit = async (error) => {
-    console.log(formData);
     error.preventDefault();
 
     const data = new FormData();
     for (let key in formData) {
-      if (formData[key]) {
+      if (key.includes("image_") && formData[key]) {
+        data.append(key, formData[key]);
+      } else if (!key.includes("image_")) {
         data.append(key, formData[key]);
       }
-    }
-
-    for (var pair of data.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
     }
 
     try {
@@ -339,14 +338,25 @@ function CreatePost() {
             )}
           </Col>
 
-          <Form.Group controlId="formImage_1" className="item">
-            <Form.Label>Image 1</Form.Label>
-            <Form.Control
-              type="file"
-              onChange={handleImageChange}
-              name="image_1"
-            />
-          </Form.Group>
+          {/* Image fields */}
+          {Array.from({ length: activePics }).map((_, index) => (
+            <Form.Group controlId={`formImage_${index + 1}`} className="item">
+              <Form.Label>Image {index + 1}</Form.Label>
+              <Form.Control
+                type="file"
+                onChange={handleImageChange}
+                name={`image_${index + 1}`}
+              />
+            </Form.Group>
+          ))}
+
+          <Col md={12} className="text-center">
+            {activePics < 5 && (
+              <Button variant="secondary" onClick={addPicField}>
+                Add Image
+              </Button>
+            )}
+          </Col>
 
           <Form.Group controlId="formDescription" className="item">
             <Form.Label>Description</Form.Label>
