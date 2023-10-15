@@ -106,7 +106,10 @@ function PostDetail() {
               (currentUser.is_staff ||
                 currentUser.user_name === post.author_name) && (
                 <Col>
-                  <button>Delete Post</button>
+                  <button>
+                    Delete Post
+                    <a href={`/editpost/${post.id}`}></a>{" "}
+                  </button>
                 </Col>
               )}
           </Row>

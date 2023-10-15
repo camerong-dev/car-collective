@@ -1,10 +1,11 @@
-import React, { useState, prevState } from "react";
+import React, { useState, prevState, useEffect } from "react";
 import axiosInstance from "../../api/axiosDefaults";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
-import "../styles/UserForms.css";
+import "../../styles/UserForms.css";
 import { isTokenExpired } from "../../util/isTokenExpired";
+import { useParams } from "react-router-dom";
 
-function EditPost() {
+function EditPost({ postId }) {
   const [formData, setFormData] = useState({
     title: "",
     author: "",
@@ -35,6 +36,22 @@ function EditPost() {
     image_4: null,
     image_5: null,
   });
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    const fetchPostDetails = async () => {
+      try {
+        const response = await axiosInstance.get(`posts/${id}/`);
+        console.log("API Response: ", response.data);
+        setFormData((prevData) => ({ ...prevData, ...response.data }));
+      } catch (error) {
+        console.error("Error fetching post details:", error);
+        setError(error.message || "An error occurred");
+      }
+    };
+    fetchPostDetails();
+  }, [postId]);
 
   //Defining options for dropdown fields:
   const SHAPE_OPTIONS = ["Hatchback", "Saloon", "Estate", "SUV", "Convertible"];
@@ -72,33 +89,32 @@ function EditPost() {
   };
 
   const handleImageChange = (a) => {
-    console.log(a.target.files[0]);
+    const file = a.target.files[0];
+    const name = a.target.name;
+    console.log("File: ", file, "Name: ", name);
     setFormData((prevState) => ({
       ...prevState,
-      [a.target.name]: a.target.files[0],
+      [name]: file,
     }));
   };
 
   const handleSubmit = async (error) => {
-    console.log(formData);
     error.preventDefault();
 
     const data = new FormData();
     for (let key in formData) {
-      if (formData[key]) {
+      if (key.includes("image_") && formData[key]) {
+        data.append(key, formData[key]);
+      } else if (!key.includes("image_")) {
         data.append(key, formData[key]);
       }
-    }
-
-    for (var pair of data.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
     }
 
     try {
       if (isTokenExpired(localStorage.getItem("access_token"))) {
         await axiosInstance.get("user/get_username/");
       }
-      const response = await axiosInstance.post("create/", data, {
+      const response = await axiosInstance.put(`edit/${id}/`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: localStorage.getItem("access_token")
@@ -339,14 +355,25 @@ function EditPost() {
             )}
           </Col>
 
-          <Form.Group controlId="formImage_1" className="item">
-            <Form.Label>Image 1</Form.Label>
-            <Form.Control
-              type="file"
-              onChange={handleImageChange}
-              name="image_1"
-            />
-          </Form.Group>
+          {/* Image fields */}
+          {Array.from({ length: activePics }).map((_, index) => (
+            <Form.Group controlId={`formImage_${index + 1}`} className="item">
+              <Form.Label>Image {index + 1}</Form.Label>
+              <Form.Control
+                type="file"
+                onChange={handleImageChange}
+                name={`image_${index + 1}`}
+              />
+            </Form.Group>
+          ))}
+
+          <Col md={12} className="text-center">
+            {activePics < 5 && (
+              <Button variant="secondary" onClick={addPicField}>
+                Add Image
+              </Button>
+            )}
+          </Col>
 
           <Form.Group controlId="formDescription" className="item">
             <Form.Label>Description</Form.Label>
@@ -363,7 +390,7 @@ function EditPost() {
           <Col md={12}>
             <Form.Group className="form-button-container">
               <Button variant="primary" type="submit" className="form-button">
-                Save Changes
+                Update your post
               </Button>
             </Form.Group>
           </Col>

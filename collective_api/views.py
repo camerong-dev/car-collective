@@ -54,7 +54,7 @@ class EditPost(generics.UpdateAPIView):
 
     def update(self, request, *args, **kwargs):
         post = self.get_object()
-        if request.user == post.creator or request.user.is_staff:
+        if request.user == post.author or request.user.is_staff:
             return super().update(request, *args, **kwargs)
         else:
             return Response({'detail': 'You do not have permission to edit this post'}, status=status.HTTP_403_FORBIDDEN)
