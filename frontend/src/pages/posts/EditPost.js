@@ -1,10 +1,10 @@
 import React, { useState, prevState } from "react";
-import axiosInstance from "../api/axiosDefaults";
+import axiosInstance from "../../api/axiosDefaults";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import "../styles/UserForms.css";
-import { isTokenExpired } from "../util/isTokenExpired";
+import { isTokenExpired } from "../../util/isTokenExpired";
 
-function CreatePost() {
+function EditPost() {
   const [formData, setFormData] = useState({
     title: "",
     author: "",
@@ -30,6 +30,10 @@ function CreatePost() {
     mod_title_5: "",
     mod_description_5: "",
     image_1: null,
+    image_2: null,
+    image_3: null,
+    image_4: null,
+    image_5: null,
   });
 
   //Defining options for dropdown fields:
@@ -359,7 +363,7 @@ function CreatePost() {
           <Col md={12}>
             <Form.Group className="form-button-container">
               <Button variant="primary" type="submit" className="form-button">
-                Create Post
+                Save Changes
               </Button>
             </Form.Group>
           </Col>
@@ -369,4 +373,4 @@ function CreatePost() {
   );
 }
 
-export default CreatePost;
+export default EditPost;

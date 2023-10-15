@@ -11,7 +11,7 @@ import PostDetail from "./components/PostDetail";
 import jwtDecode from "jsonwebtoken/decode";
 import fetchUsername from "./util/fetchUsername";
 import { logoutUser } from "./components/Logout";
-import CreatePost from "./pages/CreatePost";
+import CreatePost from "./pages/posts/CreatePost";
 
 function App() {
   const { PostList } = usePostList();

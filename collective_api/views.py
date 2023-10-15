@@ -1,5 +1,6 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from collective.models import Post
 from .serializers import PostSerializer
 from rest_framework.permissions import BasePermission, IsAuthenticatedOrReadOnly, SAFE_METHODS, IsAuthenticated
@@ -44,3 +45,26 @@ class CreatePost(generics.CreateAPIView):
 
 def perform_create(self, serializer):
     serializer.save(author=self.request.user)
+
+
+class EditPost(generics.UpdateAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = PostSerializer
+    queryset = Post.objects.all()
+
+    def update(self, request, *args, **kwargs):
+        post = self.get_object()
+        if request.user == post.creator or request.user.is_staff:
+            return super().update(request, *args, **kwargs)
+        else:
+            return Response({'detail': 'You do not have permission to edit this post'}, status=status.HTTP_403_FORBIDDEN)
+        
+
+class CurrentUserView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        return Response({
+            'username': request.user.user_name,
+            'is_staff': request.user.is_staff,
+        })

@@ -10,6 +10,7 @@ import {
   Modal,
 } from "react-bootstrap";
 import "../styles/PostDetail.css";
+import useCurrentUser from "../hooks/useCurrentUser";
 
 function PostDetail() {
   const { id } = useParams();
@@ -18,6 +19,9 @@ function PostDetail() {
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [currentImg, setCurrentImg] = useState("");
+  const { currentUser } = useCurrentUser();
+
+  console.log(currentUser);
 
   useEffect(() => {
     axiosInstance
@@ -86,11 +90,25 @@ function PostDetail() {
             <Col>
               <strong>{post.title}</strong>
             </Col>
+            {currentUser &&
+              (currentUser.is_staff ||
+                currentUser.user_name === post.author_name) && (
+                <Col>
+                  <button>Edit Post</button>
+                </Col>
+              )}
           </Row>
           <Row className="mb-2">
             <Col>
               <p>Owner: {post.author_name}</p>
             </Col>
+            {currentUser &&
+              (currentUser.is_staff ||
+                currentUser.user_name === post.author_name) && (
+                <Col>
+                  <button>Delete Post</button>
+                </Col>
+              )}
           </Row>
           <hr />
           <Row className="mb-2">
