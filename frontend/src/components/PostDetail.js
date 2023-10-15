@@ -92,13 +92,23 @@ function PostDetail() {
               <p>Owner: {post.author_name}</p>
             </Col>
           </Row>
+          <hr />
           <Row className="mb-2">
             <Col>{post.manufacturer}</Col>
             <Col>{post.car_model}</Col>
           </Row>
           <Row className="mb-2">
+            <Col>{post.year_of_manufacture}</Col>
+            <Col>{post.shape}</Col>
+          </Row>
+          <Row className="mb-2">
+            <Col>{post.colour}</Col>
+          </Row>
+
+          <hr />
+          <Row className="mb-2">
             <Col>{post.engine_layout}</Col>
-            <Col>{post.engine_capacity}</Col>
+            <Col>{post.engine_capacity}L</Col>
           </Row>
           <Row className="mb-2">
             <Col>{post.gearbox}</Col>
@@ -106,9 +116,8 @@ function PostDetail() {
           </Row>
           <Row className="mb-2">
             <Col>{post.fuel_type}</Col>
-            <Col>{post.colour}</Col>
           </Row>
-          <br />
+          <hr />
           <Row className="mb-2">
             <Col>Mods:</Col>
           </Row>
