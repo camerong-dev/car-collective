@@ -30,6 +30,22 @@ function CreatePost() {
   ];
   const FUEL_TYPE_OPTIONS = ["Petrol", "Diesel", "Hybrid", "Electric"];
 
+  const [activeMods, setActiveMods] = useState(1);
+
+  const addModField = () => {
+    if (activeMods < 5) {
+      setActiveMods((prevCount) => prevCount + 1);
+    }
+  };
+
+  const [activePics, setActivePics] = useState(1);
+
+  const addPicField = () => {
+    if (activePics < 5) {
+      setActivePics((prevCount) => prevCount + 1);
+    }
+  };
+
   const [error, setError] = useState(null);
 
   const handleChange = (error) => {
@@ -68,6 +84,7 @@ function CreatePost() {
             <p className="alert alert-danger">{error}</p>
           </Col>
         )}
+
         <Form.Group controlId="formTitle" className="item">
           <Form.Label>Title</Form.Label>
           <Form.Control
@@ -238,6 +255,52 @@ function CreatePost() {
               required
             />
           </Form.Group>
+        </Col>
+
+        {/* Mod fields */}
+        {Array.from({ length: activeMods }).map((_, index) => (
+          <React.Fragment key={index}>
+            <Col md={6}>
+              <Form.Group
+                controlId={`formModTitle_${index + 1}`}
+                className="item"
+              >
+                <Form.Label>Mod Title {index + 1}</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder={`Enter Mod Title ${index + 1}`}
+                  value={formData[`mod_title_${index + 1}`]}
+                  onChange={handleChange}
+                  name={`mod_title_${index + 1}`}
+                  required
+                />
+              </Form.Group>
+            </Col>
+            <Col md={6}>
+              <Form.Group
+                controlId={`formModDescription_${index + 1}`}
+                className="item"
+              >
+                <Form.Label>Mod Description {index + 1}</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder={`Enter Mod Description ${index + 1}`}
+                  value={formData[`mod_description_${index + 1}`]}
+                  onChange={handleChange}
+                  name={`mod_description_${index + 1}`}
+                  required
+                />
+              </Form.Group>
+            </Col>
+          </React.Fragment>
+        ))}
+
+        <Col md={12} className="text-center">
+          {activeMods < 5 && (
+            <Button variant="secondary" onClick={addModField}>
+              Add Mod
+            </Button>
+          )}
         </Col>
 
         <Col md={12}>
