@@ -88,7 +88,9 @@ function PostDetail() {
             </Col>
           </Row>
           <Row className="mb-2">
-            <Col>{post.author}</Col>
+            <Col>
+              <p>Owner: {post.author_name}</p>
+            </Col>
           </Row>
           <Row className="mb-2">
             <Col>{post.manufacturer}</Col>

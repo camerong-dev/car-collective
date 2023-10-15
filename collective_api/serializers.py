@@ -3,7 +3,7 @@ from collective.models import Post
 
 
 class PostSerializer(serializers.ModelSerializer):
-    author_name = serializers.CharField(source='author.username', read_only=True)
+    author_name = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
@@ -39,6 +39,9 @@ class PostSerializer(serializers.ModelSerializer):
             'mod_description_5',
             'description',
         )
+
+    def get_author_name(self, obj):
+        return obj.author.user_name
 
     author = serializers.PrimaryKeyRelatedField(queryset=Post.author.field.related_model.objects.all(), required=False, write_only=True)
 
