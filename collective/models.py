@@ -5,31 +5,9 @@ from django.conf import settings
 
 
 class Post(models.Model):
-    GEARBOX_CHOICES = [
-        ('manual', 'Manual'),
-        ('automatic', 'Automatic'),
-    ]
-    SHAPE_CHOICES = [
-        ('hatchback', 'Hatchback'),
-        ('saloon', 'Saloon'),
-        ('estate', 'Estate'),
-        ('suv', 'SUV'),
-        ('convertible', 'Convertible'),
-    ]
-    FUEL_TYPE_CHOICES = [
-        ('petrol', 'Petrol'),
-        ('diesel', 'Diesel'),
-        ('hybrid', 'Hybrid'),
-        ('electric', 'Electric'),
-    ]
-    DRIVETRAIN_CHOICES = [
-        ('front-wheel drive', 'Front-Wheel Drive'),
-        ('rear-wheel drive', 'Rear-Wheel Drive'),
-        ('four-wheel drive', 'Four-Wheel Drive'),
-    ]
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='posts')
-    shape = models.CharField(max_length=20, choices=SHAPE_CHOICES)
+    shape = models.CharField(max_length=20)
     created_on = models.DateTimeField(default=timezone.now)
     title = models.CharField(max_length=120)
     manufacturer = models.CharField(max_length=120)
@@ -38,9 +16,9 @@ class Post(models.Model):
     engine_capacity = models.CharField(max_length=20)
     colour = models.CharField(max_length=30)
     year_of_manufacture = models.CharField(max_length=8)
-    gearbox = models.CharField(max_length=10, choices=GEARBOX_CHOICES)
-    fuel_type = models.CharField(max_length=10, choices=FUEL_TYPE_CHOICES)
-    drivetrain = models.CharField(max_length=20, choices=DRIVETRAIN_CHOICES)
+    gearbox = models.CharField(max_length=10)
+    fuel_type = models.CharField(max_length=10)
+    drivetrain = models.CharField(max_length=20)
 
     image_1 = models.ImageField(upload_to='car-collective/media/')
     image_2 = models.ImageField(upload_to='car-collective/media/', blank=True, null=True)
@@ -62,6 +40,8 @@ class Post(models.Model):
 
     mod_title_5 = models.CharField(max_length=40, blank=True, null=True)
     mod_description_5 = models.CharField(max_length=160, blank=True, null=True)
+
+    description = models.CharField(max_length=540)
 
 
 

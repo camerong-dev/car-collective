@@ -3,27 +3,45 @@ from collective.models import Post
 
 
 class PostSerializer(serializers.ModelSerializer):
-    author = serializers.PrimaryKeyRelatedField(queryset=Post.author.field.related_model.objects.all(), required=False)
-    gearbox_display = serializers.SerializerMethodField()
-    fuel_type_display = serializers.SerializerMethodField()
-    drivetrain_display = serializers.SerializerMethodField()
-    shape_display = serializers.SerializerMethodField()
+    author_name = serializers.CharField(source='author.username', read_only=True)
 
     class Meta:
         model = Post
-        fields = '__all__'
+        fields = (
+            'id',
+            'title',
+            'author',
+            'author_name',
+            'car_model',
+            'manufacturer',
+            'year_of_manufacture',
+            'engine_layout',
+            'engine_capacity',
+            'colour',
+            'shape',
+            'gearbox',
+            'fuel_type',
+            'drivetrain',
+            'image_1',
+            'image_2',
+            'image_3',
+            'image_4',
+            'image_5',
+            'mod_title_1',
+            'mod_description_1',
+            'mod_title_2',
+            'mod_description_2',
+            'mod_title_3',
+            'mod_description_3',
+            'mod_title_4',
+            'mod_description_4',
+            'mod_title_5',
+            'mod_description_5',
+            'description',
+        )
 
-    def get_gearbox_display(self, obj):
-        return obj.get_gearbox_display()
-    
-    def get_fuel_type_display(self, obj):
-        return obj.get_fuel_type_display()
-    
-    def get_drivetrain_display(self, obj):
-        return obj.get_drivetrain_display()
-    
-    def get_shape_display(self, obj):
-        return obj.get_shape_display()
+    author = serializers.PrimaryKeyRelatedField(queryset=Post.author.field.related_model.objects.all(), required=False, write_only=True)
+
     
     def validate(self, data):
         for i in range(1, 5):

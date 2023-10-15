@@ -18,6 +18,7 @@ function CreatePost() {
     gearbox: "",
     drivetrain: "",
     shape: "",
+    description: "",
     mod_title_1: null,
     mod_description_1: "",
     mod_title_2: "",
@@ -32,14 +33,14 @@ function CreatePost() {
   });
 
   //Defining options for dropdown fields:
-  const SHAPE_OPTIONS = ["hatchback", "saloon", "estate", "suv", "convertible"];
-  const GEARBOX_OPTIONS = ["manual", "automatic"];
+  const SHAPE_OPTIONS = ["Hatchback", "Saloon", "Estate", "SUV", "Convertible"];
+  const GEARBOX_OPTIONS = ["Manual", "Automatic"];
   const DRIVETRAIN_OPTIONS = [
-    "front-wheel drive",
-    "rear-wheel drive",
-    "four-wheel drive",
+    "Front-Wheel Drive",
+    "Rear-Wheel Drive",
+    "Four-Wheel Drive",
   ];
-  const FUEL_TYPE_OPTIONS = ["petrol", "diesel", "hybrid", "electric"];
+  const FUEL_TYPE_OPTIONS = ["Petrol", "Diesel", "Hybrid", "Electric"];
 
   const [activeMods, setActiveMods] = useState(1);
 
@@ -340,6 +341,18 @@ function CreatePost() {
               type="file"
               onChange={handleImageChange}
               name="image_1"
+            />
+          </Form.Group>
+
+          <Form.Group controlId="formDescription" className="item">
+            <Form.Label>Description</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Give a brief descrption of your car..."
+              value={formData.description}
+              onChange={handleChange}
+              name="description"
+              required
             />
           </Form.Group>
 

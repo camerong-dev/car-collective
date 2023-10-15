@@ -102,6 +102,10 @@ function PostDetail() {
             <Col>{post.gearbox}</Col>
             <Col>{post.drivetrain}</Col>
           </Row>
+          <Row className="mb-2">
+            <Col>{post.fuel_type}</Col>
+            <Col>{post.colour}</Col>
+          </Row>
           <br />
           <Row className="mb-2">
             <Col>Mods:</Col>
@@ -132,21 +136,7 @@ function PostDetail() {
       <Row className="mb-4 description-section">
         <Col md={8}>
           <h4>Description:</h4>
-          <p>
-            placeholder text...placeholder text...placeholder text...placeholder
-            text...placeholder text...placeholder text...placeholder
-            text...placeholder text...placeholder text...placeholder
-            text...placeholder text...placeholder text...placeholder
-            text...placeholder text...placeholder text...placeholder
-            text...placeholder text...placeholder text...placeholder
-            text...placeholder text...placeholder text...placeholder
-            text...placeholder text...placeholder text...placeholder
-            text...placeholder text...placeholder text...placeholder
-            text...placeholder text...placeholder text...placeholder
-            text...placeholder text...placeholder text...placeholder
-            text...placeholder text...placeholder text...placeholder
-            text...placeholder text...placeholder text...
-          </p>
+          <p>{post.description}</p>
         </Col>
 
         <Col md={4} className="comments-section">

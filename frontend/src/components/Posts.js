@@ -51,7 +51,7 @@ function PostCards() {
                 <Card.Img variant="top" src={post.image_1} />
                 <Card.Body>
                   <Card.Title>{post.title}</Card.Title>
-                  <Card.Text>{post.id}</Card.Text>
+                  <Card.Text>{post.author_name}</Card.Text>
                 </Card.Body>
                 <ListGroup className="list-group-flush">
                   <ListGroup.Item>{post.car_model}</ListGroup.Item>
