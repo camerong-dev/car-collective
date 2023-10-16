@@ -11,35 +11,40 @@ const axiosInstance = axios.create({
   },
 });
 
-axiosInstance.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  async function (error) {
-    const originalRequest = error.config;
+let refresh = false;
 
-    // Check if the error is a 401 and that it's not a request trying to refresh a token
-    if (
-      error.response.status === 401 &&
-      originalRequest.url !== "api/token/refresh/"
-    ) {
-      const refreshToken = localStorage.getItem("refresh_token");
+axios.interceptors.response.use(
+  (resp) => resp,
+  async (error) => {
+    if (error.response.status === 401 && !refresh) {
+      refresh = true;
 
-      return axiosInstance
-        .post("/token/refresh/", { refresh: refreshToken })
-        .then((response) => {
-          localStorage.setItem("access_token", response.data.access);
+      console.log(localStorage.getItem("refresh_token"));
+      const response = await axios.post(
+        "api/token/refresh/",
+        {
+          refresh: localStorage.getItem("refresh_token"),
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+        { withCredentials: true }
+      );
 
-          axiosInstance.defaults.headers["Authorization"] =
-            "Bearer " + response.data.access;
-          originalRequest.headers["Authorization"] =
-            "Bearer " + response.data.access;
+      if (response.status === 200) {
+        axios.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${response.data["access"]}`;
+        localStorage.setItem("access_token", response.data.access);
+        localStorage.setItem("refresh_token", response.data.refresh);
 
-          return axiosInstance(originalRequest);
-        });
+        return axios(error.config);
+      }
     }
-
-    return Promise.reject(error);
+    refresh = false;
+    return error;
   }
 );
 

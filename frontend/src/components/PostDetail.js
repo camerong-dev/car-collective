@@ -21,8 +21,6 @@ function PostDetail() {
   const [currentImg, setCurrentImg] = useState("");
   const { currentUser } = useCurrentUser();
 
-  console.log(currentUser);
-
   useEffect(() => {
     axiosInstance
       .get(`posts/${id}/`)
