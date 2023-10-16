@@ -11,6 +11,7 @@ import {
 } from "react-bootstrap";
 import "../styles/PostDetail.css";
 import useCurrentUser from "../hooks/useCurrentUser";
+import { useNavigate } from "react-router-dom";
 
 function PostDetail() {
   const { id } = useParams();
@@ -20,6 +21,7 @@ function PostDetail() {
   const [showModal, setShowModal] = useState(false);
   const [currentImg, setCurrentImg] = useState("");
   const { currentUser } = useCurrentUser();
+  const navigate = useNavigate();
 
   console.log(currentUser);
 
@@ -94,7 +96,9 @@ function PostDetail() {
               (currentUser.is_staff ||
                 currentUser.username === post.author_name) && (
                 <Col>
-                  <button>Edit Post</button>
+                  <button onClick={() => navigate(`/editpost/${id}`)}>
+                    Edit Post
+                  </button>
                 </Col>
               )}
           </Row>
@@ -106,10 +110,7 @@ function PostDetail() {
               (currentUser.is_staff ||
                 currentUser.username === post.author_name) && (
                 <Col>
-                  <button>
-                    Delete Post
-                    <a href={`/editpost/${post.id}`}></a>{" "}
-                  </button>
+                  <button>Delete Post</button>
                 </Col>
               )}
           </Row>
