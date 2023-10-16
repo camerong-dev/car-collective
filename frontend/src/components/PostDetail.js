@@ -21,6 +21,8 @@ function PostDetail() {
   const [currentImg, setCurrentImg] = useState("");
   const { currentUser } = useCurrentUser();
 
+  console.log(currentUser);
+
   useEffect(() => {
     axiosInstance
       .get(`posts/${id}/`)
@@ -90,7 +92,7 @@ function PostDetail() {
             </Col>
             {currentUser &&
               (currentUser.is_staff ||
-                currentUser.user_name === post.author_name) && (
+                currentUser.username === post.author_name) && (
                 <Col>
                   <button>Edit Post</button>
                 </Col>
@@ -102,7 +104,7 @@ function PostDetail() {
             </Col>
             {currentUser &&
               (currentUser.is_staff ||
-                currentUser.user_name === post.author_name) && (
+                currentUser.username === post.author_name) && (
                 <Col>
                   <button>
                     Delete Post

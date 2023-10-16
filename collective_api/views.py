@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from collective.models import Post
 from .serializers import PostSerializer
-from rest_framework.permissions import BasePermission, IsAuthenticatedOrReadOnly, SAFE_METHODS, IsAuthenticated
+from rest_framework.permissions import BasePermission, IsAuthenticatedOrReadOnly, SAFE_METHODS, IsAuthenticated, AllowAny
 
 class UserWritePermission(BasePermission):
     message = 'Sorry, editing is only available to the author.'
@@ -64,7 +64,10 @@ class CurrentUserView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        return Response({
-            'username': request.user.user_name,
-            'is_staff': request.user.is_staff,
-        })
+        if request.user.is_authenticated:
+            return Response({
+                'username': request.user.user_name,
+                'is_staff': request.user.is_staff,
+            })
+        else:
+            return Response({"detail": "User not authenticated"}, status=status.HTTP_401_UNAUTHORIZED)
