@@ -1,8 +1,9 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from collective.models import Post
-from .serializers import PostSerializer
+from collective.models import Post, Like
+from django.shortcuts import get_object_or_404
+from .serializers import PostSerializer, LikeSerializer
 from rest_framework.permissions import BasePermission, IsAuthenticatedOrReadOnly, SAFE_METHODS, IsAuthenticated, AllowAny
 
 class UserWritePermission(BasePermission):
@@ -77,3 +78,19 @@ class DeletePost(generics.RetrieveDestroyAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = PostSerializer
     queryset = Post.objects.all()
+
+
+class LikePost(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, post_id, format=None):
+        post = get_object_or_404(Post, id=post_id)
+        liked = Like.objects.filter(user=request.user, post=post).exists()
+
+        if not liked:
+            like = Like(user=request.user, post=post)
+            like.save()
+            return Response({'status': 'liked'}, status=status.HTTP_201_CREATED)
+        else:
+            Like.objects.filter(user=request.user, post=post).delete()
+            return Response({'status': 'unliked'}, status=status.HTTP_200_OK)

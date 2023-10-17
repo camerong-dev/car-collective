@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from collective.models import Post
+from collective.models import Post, Like
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -57,3 +57,9 @@ class PostSerializer(serializers.ModelSerializer):
                 })
             
         return data
+    
+
+class LikeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Like
+        fields = ('user', 'post', )
