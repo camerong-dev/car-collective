@@ -71,3 +71,9 @@ class CurrentUserView(APIView):
             })
         else:
             return Response({"detail": "User not authenticated"}, status=status.HTTP_401_UNAUTHORIZED)
+        
+
+class DeletePost(generics.RetrieveDestroyAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = PostSerializer
+    queryset = Post.objects.all()

@@ -1,4 +1,5 @@
 import axios from "axios";
+import getCsrfToken from "../util/getCsrfToken";
 
 const baseURL = "http://127.0.0.1:8000/api";
 
@@ -12,6 +13,14 @@ const axiosInstance = axios.create({
 });
 
 let isRefreshing = false;
+
+axiosInstance.interceptors.request.use((config) => {
+  const csrfToken = getCsrfToken();
+  if (csrfToken) {
+    config.headers["X-CSRFToken"] = csrfToken;
+  }
+  return config;
+});
 
 axiosInstance.interceptors.response.use(
   (response) => response,

@@ -12,6 +12,7 @@ import {
 import "../styles/PostDetail.css";
 import useCurrentUser from "../hooks/useCurrentUser";
 import { useNavigate } from "react-router-dom";
+import DeleteButton from "../pages/posts/DeletePost";
 
 function PostDetail() {
   const { id } = useParams();
@@ -110,7 +111,12 @@ function PostDetail() {
               (currentUser.is_staff ||
                 currentUser.username === post.author_name) && (
                 <Col>
-                  <button>Delete Post</button>
+                  <DeleteButton
+                    postId={id}
+                    onSuccess={() => {
+                      navigate("/");
+                    }}
+                  />
                 </Col>
               )}
           </Row>
