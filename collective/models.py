@@ -41,7 +41,7 @@ class Post(models.Model):
     mod_title_5 = models.CharField(max_length=40, blank=True, null=True)
     mod_description_5 = models.CharField(max_length=160, blank=True, null=True)
 
-    description = models.CharField(max_length=540)
+    description = models.CharField(max_length=840)
 
 
 

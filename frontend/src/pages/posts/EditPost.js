@@ -44,7 +44,15 @@ function EditPost({ postId }) {
       try {
         const response = await axiosInstance.get(`posts/${id}/`);
         console.log("API Response: ", response.data);
-        setFormData((prevData) => ({ ...prevData, ...response.data }));
+        setFormData((prevData) => ({
+          ...prevData,
+          ...response.data,
+          image_1: null,
+          image_2: null,
+          image_3: null,
+          image_4: null,
+          image_5: null,
+        }));
       } catch (error) {
         console.error("Error fetching post details:", error);
         setError(error.message || "An error occurred");
