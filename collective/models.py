@@ -43,14 +43,15 @@ class Post(models.Model):
 
     description = models.CharField(max_length=840)
 
-
-
     def get_absolute_url(self):
         return reverse('post-id', kwargs={"pk": self.id})
     # Provides a specific key to be able to search for
 
     def __str__(self):
         return self.title
+    
+    def like_count(self):
+        return self.like_set.count()
     
 
 class Like(models.Model):
