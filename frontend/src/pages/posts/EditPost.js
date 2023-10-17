@@ -3,7 +3,7 @@ import axiosInstance from "../../api/axiosDefaults";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import "../../styles/UserForms.css";
 import { isTokenExpired } from "../../util/isTokenExpired";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 function EditPost({ postId }) {
   const [formData, setFormData] = useState({
@@ -60,6 +60,8 @@ function EditPost({ postId }) {
     };
     fetchPostDetails();
   }, [postId]);
+
+  const navigate = useNavigate();
 
   //Defining options for dropdown fields:
   const SHAPE_OPTIONS = ["Hatchback", "Saloon", "Estate", "SUV", "Convertible"];
@@ -130,10 +132,19 @@ function EditPost({ postId }) {
             : null,
         },
       });
+      if (response.status === 403) {
+        setError("You do not have permission to edit this post");
+        return;
+      }
       console.log(response.data);
+      navigate(`/post/${id}`);
     } catch (error) {
       console.error("Error posting:", error);
-      setError(error.message || "An error occurred");
+      const errorMessage =
+        error.response && error.response.data && error.response.data.detail
+          ? error.response.data.detail
+          : error.message || "An error occurred";
+      setError(errorMessage);
     }
   };
 
