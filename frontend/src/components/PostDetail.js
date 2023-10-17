@@ -113,7 +113,7 @@ function PostDetail() {
                 <Col>
                   <DeleteButton
                     postId={id}
-                    onSuccess={() => {
+                    onPostDeleted={() => {
                       navigate("/");
                     }}
                   />
