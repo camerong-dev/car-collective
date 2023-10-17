@@ -52,6 +52,29 @@
   text-decoration: none;
 }
 
+.likes {
+  border: none;
+  background-color: transparent;
+}
+
+.like-item {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding: 10px;
+  border: none;
+}
+
+.heart-icon {
+  color: #ff0000;
+  margin-right: 8px;
+}
+
+.like-count {
+  font-size: 1rem;
+  color: #333;
+}
+
 .pagination-container {
   margin-top: 20px;
 }

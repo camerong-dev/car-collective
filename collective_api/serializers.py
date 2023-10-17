@@ -5,6 +5,7 @@ from collective.models import Post, Like
 class PostSerializer(serializers.ModelSerializer):
     author_name = serializers.SerializerMethodField()
     user_has_liked = serializers.SerializerMethodField()
+    num_likes = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
@@ -40,6 +41,7 @@ class PostSerializer(serializers.ModelSerializer):
             'mod_description_5',
             'description',
             'user_has_liked',
+            'num_likes',
         )
 
     def get_author_name(self, obj):
@@ -50,6 +52,9 @@ class PostSerializer(serializers.ModelSerializer):
         if user.is_authenticated:
             return Like.objects.filter(user=user, post=obj).exists()
         return False
+    
+    def get_num_likes(self, obj):
+        return obj.likes.count()
 
     author = serializers.PrimaryKeyRelatedField(queryset=Post.author.field.related_model.objects.all(), required=False, write_only=True)
 
