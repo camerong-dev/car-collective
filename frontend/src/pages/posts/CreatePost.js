@@ -19,7 +19,7 @@ function CreatePost() {
     drivetrain: "",
     shape: "",
     description: "",
-    mod_title_1: null,
+    mod_title_1: "",
     mod_description_1: "",
     mod_title_2: "",
     mod_description_2: "",
@@ -46,7 +46,7 @@ function CreatePost() {
   ];
   const FUEL_TYPE_OPTIONS = ["Petrol", "Diesel", "Hybrid", "Electric"];
 
-  const [activeMods, setActiveMods] = useState(1);
+  const [activeMods, setActiveMods] = useState(0);
 
   const addModField = () => {
     if (activeMods < 5) {

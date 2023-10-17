@@ -20,7 +20,7 @@ function EditPost({ postId }) {
     drivetrain: "",
     shape: "",
     description: "",
-    mod_title_1: null,
+    mod_title_1: "",
     mod_description_1: "",
     mod_title_2: "",
     mod_description_2: "",
