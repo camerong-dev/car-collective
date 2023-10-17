@@ -22,11 +22,17 @@ class PostList(generics.ListCreateAPIView):
     serializer_class = PostSerializer
     queryset = Post.objects.all()
 
+    def get_serializer_context(self):
+        return {"request": self.request}
+
 
 class PostDetail(generics.RetrieveDestroyAPIView):
     permission_classes = [UserWritePermission]
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+    def get_serializer_context(self):
+        return {"request": self.request}
 
 
 class CreatePost(generics.CreateAPIView):

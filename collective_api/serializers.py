@@ -4,6 +4,7 @@ from collective.models import Post, Like
 
 class PostSerializer(serializers.ModelSerializer):
     author_name = serializers.SerializerMethodField()
+    user_has_liked = serializers.SerializerMethodField()
 
     class Meta:
         model = Post
@@ -38,10 +39,17 @@ class PostSerializer(serializers.ModelSerializer):
             'mod_title_5',
             'mod_description_5',
             'description',
+            'user_has_liked',
         )
 
     def get_author_name(self, obj):
         return obj.author.user_name
+    
+    def get_user_has_liked(self, obj):
+        user = self.context['request'].user
+        if user.is_authenticated:
+            return Like.objects.filter(user=user, post=obj).exists()
+        return False
 
     author = serializers.PrimaryKeyRelatedField(queryset=Post.author.field.related_model.objects.all(), required=False, write_only=True)
 
