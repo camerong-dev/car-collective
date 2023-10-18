@@ -10,6 +10,7 @@ import {
   Modal,
 } from "react-bootstrap";
 import "../styles/PostDetail.css";
+import "../styles/Comment.css";
 import { useNavigate } from "react-router-dom";
 import DeleteButton from "../pages/posts/DeletePost";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -117,7 +118,8 @@ function PostDetail() {
         <h4>Comments:</h4>
         {comments.map((comment) => (
           <div key={comment.id} className="mb-3">
-            <strong>{comment.author_name}:</strong> {comment.content}
+            <strong>{comment.author_name}:</strong> {comment.content}{" "}
+            {comment.timestamp}
           </div>
         ))}
         {currentUser && (
