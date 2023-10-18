@@ -101,7 +101,11 @@ function EditPost({ postId }) {
   const handleImageChange = (a) => {
     const file = a.target.files[0];
     const name = a.target.name;
-    console.log("File: ", file, "Name: ", name);
+
+    if (file.size > 5 * 1024 * 1024) {
+      setError("Image size should be less than 5MB.");
+      return;
+    }
     setFormData((prevState) => ({
       ...prevState,
       [name]: file,
@@ -132,12 +136,12 @@ function EditPost({ postId }) {
             : null,
         },
       });
+      navigate(`/post/${id}`);
       if (response.status === 403) {
         setError("You do not have permission to edit this post");
         return;
       }
       console.log(response.data);
-      navigate(`/post/${id}`);
     } catch (error) {
       console.error("Error posting:", error);
       const errorMessage =

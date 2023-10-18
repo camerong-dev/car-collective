@@ -77,6 +77,11 @@ function CreatePost() {
   const handleImageChange = (a) => {
     const file = a.target.files[0];
     const name = a.target.name;
+
+    if (file.size > 5 * 1024 * 1024) {
+      setError("Image size should be less than 5MB.");
+      return;
+    }
     setFormData((prevState) => ({
       ...prevState,
       [name]: file,
@@ -110,7 +115,15 @@ function CreatePost() {
       navigate("/");
     } catch (error) {
       console.error("Error posting:", error);
-      setError(error.message || "An error occurred");
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        setError(error.response.data.message);
+      } else {
+        setError("An error occurred while creating the post.");
+      }
     }
   };
 
