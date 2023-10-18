@@ -1,39 +1,91 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Car-Collective
 
-Welcome,
+Car-Collective is a site for car enthusiasts to come together and post their cars, and interact with other posts from like minded people.
 
-This is the Code Institute student template for Codeanywhere. If you are using Gitpod then you need [this template](https://github.com/Code-Institute-Org/gitpod-full-template) instead.  We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+## Live Site
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Codeanywhere and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **August 30th, 2023**
+[Car-Collective](https://car-collective-8debc1088dd6.herokuapp.com/)
 
-## Codeanywhere Reminders
+## Contents
 
-To run a frontend (HTML, CSS, Javascript only) application in Codeanywhere, in the terminal, type:
+- [User Experiences](#user-experence)
+  - [User Stories]("user-stories)
+  - [Agile Methodology](#agile-methodology)
+  - [Wireframes](#wireframes)
+  - [Database](#database)
+  - [Color Scheme](#color-scheme)
+- [Features](#features)
+  - [Existing Features](#existing-features)
+  - [Future Features](#future-features)
+- [Technologies](#technologies)
+  - [Languages & Frameworks](#languages-and-frameworks)
+  - [Other](#other)
+- [Testing](#testing)
 
-`python3 -m http.server`
+## **User Experiences**
 
-A button should appear to click: _Open Preview_ or _Open Browser_.
+### **User Stories**
 
-To run a frontend (HTML, CSS, Javascript only) application in Codeanywhere with no-cache, you can use this alias for `python3 -m http.server`.
+- User Authentication
 
-`http_server`
+  - As a user I can create a new account
+  - As a user I can sign into an existing account
+  - As a user I can logout of my account
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+- Navigation
 
-A button should appear to click: _Open Preview_ or _Open Browser_.
+  - As a user I can view the navbar from every page
+  - As a user I can view the footer from every page
+  - As a user I can access further areas if I am authenticated/authorized
 
-In Codeanywhere you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+- Home Page
 
-To log into the Heroku toolbelt CLI:
+  - As a user I can view all posts from the database
+  - As a user I can see the amount of likes on a post
+  - As a user I can select a post to view more details
 
-1. Log in to your Heroku account and go to _Account Settings_ in the menu under your avatar.
-2. Scroll down to the _API Key_ and click _Reveal_
-3. Copy the key
-4. In Codeanywhere, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+- Post Detail Page
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+  - As a user I can view all data from the post
+  - As an authenticated user I can like the post
+  - As an authenticated user I can comment on the post
 
----
+- Posts
+  - As an authenticated user I can create new posts
+  - As an authenticated user I can edit my own posts
+  - As an authenticated user I can delete my own posts
+  - As a staff user I can edit edit any post
+  - As a staff user I can delete edit any post
 
-Happy coding!
+[Back to top](#contents)
+
+### **Agile Methodology**
+
+This project utulised Agile Methodolgy for development. I used Jira to track my tickets:
+
+![Project Board 1](staticfiles/readme/project-board-1.png)
+![Project Board 2](staticfiles/readme/project-board-2.png)
+
+[Back to top](#contents)
+
+### **Wireframes**
+
+Wireframes were created using [Pencil](https://pencil.evolus.vn/). These were initial rough ideas of the site structure and layout.
+
+![Home Page](staticfiles/readme/pencil-designs/home-page-mock.png)
+![Detail Page](staticfiles/readme/pencil-designs/post-detail-page-mock.png)
+![Create/Edit Page](staticfiles/readme/pencil-designs/create-edit-post-page-mock.png)
+![Sign In Page](staticfiles/readme/pencil-designs/signin-page-mock.png)
+![Sign Up Page](staticfiles/readme/pencil-designs/signup-page-mock.png)
+
+[Back to top](#contents)
+
+### **Database**
+
+I used [Lucid chart](https://lucidchart.com/pages/) to create a data flow diagram showing what an authorized and non-authorized user had access to throughout the site. I have also shown below my custom models for User, Post, Like and Comment.
+
+![Data Flow Chart](staticfiles/readme/data-flow-diagram.png)
+
+![Database](staticfiles/readme/models.png)
+
+[Back to top](#contents)
