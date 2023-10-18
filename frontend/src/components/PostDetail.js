@@ -15,8 +15,7 @@ import DeleteButton from "../pages/posts/DeletePost";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { fetchPostDetail } from "../util/fetchPostDetail";
-import Comment from "./Comment";
-import UserContext from "./UserContext";
+import useCurrentUser from "../hooks/useCurrentUser";
 
 function PostDetail() {
   const { id } = useParams();
@@ -25,7 +24,7 @@ function PostDetail() {
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [currentImg, setCurrentImg] = useState("");
-  const { currentUser } = useContext(UserContext);
+  const { currentUser } = useCurrentUser();
   const navigate = useNavigate();
   const [liked, setLiked] = useState(false);
 
@@ -74,6 +73,72 @@ function PostDetail() {
     post.image_4,
     post.image_5,
   ].filter((img) => img);
+
+  const Comment = ({ postid }) => {
+    const [comments, setComments] = useState([]);
+    const [commentContent, setCommentContent] = useState("");
+    const { currentUser } = useCurrentUser();
+
+    console.log(currentUser);
+
+    useEffect(() => {
+      const fetchComments = async () => {
+        try {
+          const response = await axiosInstance.get(`/posts/${id}/comments/`);
+          setComments(response.data);
+        } catch (error) {
+          console.error("Error fetching comments", error);
+        }
+      };
+
+      fetchComments();
+    }, [id]);
+
+    const handleCommentSubmit = async () => {
+      if (!commentContent.trim()) {
+        alert("Comment cannot be empty");
+        return;
+      }
+
+      try {
+        const response = await axiosInstance.post(`/posts/${id}/comments/`, {
+          content: commentContent,
+          post: id,
+        });
+        setComments([...comments, response.data]);
+        setCommentContent("");
+      } catch (error) {
+        console.error("Error submitting comment", error);
+      }
+    };
+
+    return (
+      <Col md={8} className="comments-section">
+        <h4>Comments:</h4>
+        {comments.map((comment) => (
+          <div key={comment.id} className="mb-3">
+            <strong>{comment.author_name}:</strong> {comment.content}
+          </div>
+        ))}
+        {currentUser && (
+          <div className="comment-input-section">
+            <textarea
+              className="comment-input"
+              placeholder="Add a comment..."
+              value={commentContent}
+              onChange={(e) => setCommentContent(e.target.value)}
+            />
+            <button
+              className="submit-comment-button"
+              onClick={handleCommentSubmit}
+            >
+              Post Comment
+            </button>
+          </div>
+        )}
+      </Col>
+    );
+  };
 
   return (
     <Container>
@@ -214,7 +279,7 @@ function PostDetail() {
       </Row>
 
       <Row className="mb-4 description-section">
-        <Comment postId={id} />
+        <Comment />
         <Col md={4}>
           <h4>Description:</h4>
           <p>{post.description}</p>
