@@ -24,7 +24,8 @@
 }
 
 .description-section,
-.comments-section {
+.comments-section,
+.likes-section {
   background-color: #f5f5f5;
   padding: 10px;
   border-radius: 15px;
@@ -35,6 +36,49 @@
 .description-section h4,
 .comments-section h4 {
   margin-bottom: 10px;
+}
+
+.likes-row {
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.heart-icon {
+  color: #ff0000;
+  margin-right: 5px;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  50% {
+    transform: translateX(10px);
+  }
+  75% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.shaking {
+  animation: shake 0.5s;
+}
+
+.likes-count {
+  font-weight: bold;
+}
+
+.like-button {
+  text-align: right;
 }
 
 .comments-section div {

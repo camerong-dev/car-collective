@@ -13,6 +13,9 @@ import "../styles/PostDetail.css";
 import useCurrentUser from "../hooks/useCurrentUser";
 import { useNavigate } from "react-router-dom";
 import DeleteButton from "../pages/posts/DeletePost";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { fetchPostDetail } from "../util/fetchPostDetail";
 
 function PostDetail() {
   const { id } = useParams();
@@ -23,14 +26,35 @@ function PostDetail() {
   const [currentImg, setCurrentImg] = useState("");
   const { currentUser } = useCurrentUser();
   const navigate = useNavigate();
+  const [liked, setLiked] = useState(false);
 
   console.log(currentUser);
 
-  useEffect(() => {
+  const handleLike = () => {
+    const heartIcon = document.querySelector(".heart-icon");
+    heartIcon.classList.add("shaking");
+
+    setTimeout(() => {
+      heartIcon.classList.remove("shaking");
+    }, 500);
+    setLiked(true);
     axiosInstance
-      .get(`posts/${id}/`)
-      .then((response) => {
-        setPost(response.data);
+      .post(`like/${id}/`)
+      .then(() => {
+        return fetchPostDetail(id);
+      })
+      .then((data) => {
+        setPost(data);
+      })
+      .catch((error) => {
+        console.error("Error liking the post:", error);
+      });
+  };
+
+  useEffect(() => {
+    fetchPostDetail(id)
+      .then((data) => {
+        setPost(data);
         setLoading(false);
       })
       .catch((error) => {
@@ -168,6 +192,22 @@ function PostDetail() {
           <Row className="mb-2">
             <Col>{post.mod_title_5}</Col>
             <Col>{post.mod_description_5}</Col>
+          </Row>
+          <hr />
+          <Row className="likes-row mb-2">
+            <Col>
+              <FontAwesomeIcon icon={faHeart} className="heart-icon" />
+              <span className="likes-count">{post.num_likes} Likes</span>
+              <div>
+                <button
+                  className="like-button"
+                  title="Like Post"
+                  onClick={handleLike}
+                >
+                  Like / Unlike Post
+                </button>
+              </div>
+            </Col>
           </Row>
         </Col>
       </Row>

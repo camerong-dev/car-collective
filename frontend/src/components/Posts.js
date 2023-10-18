@@ -65,7 +65,7 @@ function PostCards() {
                 <ListGroup className="likes">
                   <ListGroup.Item className="like-item">
                     <FontAwesomeIcon icon={faHeart} className="heart-icon" />
-                    <span className="like-count">{post.num_likes}</span>
+                    <span className="like-count">{post.num_likes} Likes</span>
                   </ListGroup.Item>
                 </ListGroup>
               </Card.Body>
