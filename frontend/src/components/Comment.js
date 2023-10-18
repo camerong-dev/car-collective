@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axiosInstance from "../api/axiosDefaults";
 import { Col } from "react-bootstrap";
 import UserContext from "./UserContext";
+import "../styles/Comment.css";
 
 const Comment = ({ postId }) => {
   const [comments, setComments] = useState([]);
@@ -40,7 +41,7 @@ const Comment = ({ postId }) => {
   };
 
   return (
-    <Col md={4} className="comments-section">
+    <Col md={8} className="comments-section">
       <h4>Comments:</h4>
       {comments.map((comment) => (
         <div key={comment.id} className="mb-3">
@@ -48,13 +49,19 @@ const Comment = ({ postId }) => {
         </div>
       ))}
       {currentUser && (
-        <div>
+        <div className="comment-input-section">
           <textarea
+            className="comment-input"
             placeholder="Add a comment..."
             value={commentContent}
             onChange={(e) => setCommentContent(e.target.value)}
           />
-          <button onClick={handleCommentSubmit}>Post Comment</button>
+          <button
+            className="submit-comment-button"
+            onClick={handleCommentSubmit}
+          >
+            Post Comment
+          </button>
         </div>
       )}
     </Col>

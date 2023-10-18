@@ -214,12 +214,11 @@ function PostDetail() {
       </Row>
 
       <Row className="mb-4 description-section">
-        <Col md={8}>
+        <Comment postId={id} />
+        <Col md={4}>
           <h4>Description:</h4>
           <p>{post.description}</p>
         </Col>
-
-        <Comment postId={id} />
       </Row>
     </Container>
   );
