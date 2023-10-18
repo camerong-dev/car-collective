@@ -73,12 +73,20 @@ class PostSerializer(serializers.ModelSerializer):
     
 
 class LikeSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Like
         fields = ('user', 'post', )
 
 
 class CommentSerializer(serializers.ModelSerializer):
+
+    author_name = serializers.SerializerMethodField()
     class Meta:
         model = Comment
-        fields = ['id', 'post', 'author', 'content', 'timestamp']
+        fields = ['id', 'post', 'author', 'author_name', 'content', 'timestamp']
+        read_only_fields = ['author']
+
+    
+    def get_author_name(self, obj):
+        return obj.author.user_name

@@ -31,7 +31,6 @@ const Comment = ({ postId }) => {
       const response = await axiosInstance.post(`/posts/${postId}/comments/`, {
         content: commentContent,
         post: postId,
-        author: currentUser.user_name,
       });
       setComments([...comments, response.data]);
       setCommentContent("");
@@ -45,7 +44,7 @@ const Comment = ({ postId }) => {
       <h4>Comments:</h4>
       {comments.map((comment) => (
         <div key={comment.id} className="mb-3">
-          <strong>{comment.author}:</strong> {comment.content}
+          <strong>{comment.author_name}:</strong> {comment.content}
         </div>
       ))}
       {currentUser && (
