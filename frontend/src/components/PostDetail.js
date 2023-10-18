@@ -198,15 +198,17 @@ function PostDetail() {
             <Col>
               <FontAwesomeIcon icon={faHeart} className="heart-icon" />
               <span className="likes-count">{post.num_likes} Likes</span>
-              <div>
-                <button
-                  className="like-button"
-                  title="Like Post"
-                  onClick={handleLike}
-                >
-                  Like / Unlike Post
-                </button>
-              </div>
+              {currentUser ? (
+                <div>
+                  <button
+                    className="like-button"
+                    title="Like Post"
+                    onClick={handleLike}
+                  >
+                    Like / Unlike Post
+                  </button>
+                </div>
+              ) : null}
             </Col>
           </Row>
         </Col>
