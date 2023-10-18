@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'accounts',
     'rest_framework_simplejwt.token_blacklist',
+    'image_optimizer'
 ]
 
 MIDDLEWARE = [
@@ -197,3 +198,7 @@ SIMPLE_JWT = {
     "ROTATE_REFRESH_TOKENS": True,
     "AUTH_HEADER_TYPES": ("Bearer",),
 }
+
+
+OPTIMIZED_IMAGE_METHOD = 'tinypng'
+TINYPNG_KEY = os.getenv('TNYPNG_KEY')

@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.conf import settings
+from image_optimizer.fields import OptimizedImageField
 
 
 class Post(models.Model):
@@ -20,11 +21,11 @@ class Post(models.Model):
     fuel_type = models.CharField(max_length=10)
     drivetrain = models.CharField(max_length=20)
 
-    image_1 = models.ImageField(upload_to='car-collective/media/')
-    image_2 = models.ImageField(upload_to='car-collective/media/', blank=True, null=True)
-    image_3 = models.ImageField(upload_to='car-collective/media/', blank=True, null=True)
-    image_4 = models.ImageField(upload_to='car-collective/media/', blank=True, null=True)
-    image_5 = models.ImageField(upload_to='car-collective/media/', blank=True, null=True)
+    image_1 = OptimizedImageField(upload_to='car-collective/media/')
+    image_2 = OptimizedImageField(upload_to='car-collective/media/', blank=True, null=True)
+    image_3 = OptimizedImageField(upload_to='car-collective/media/', blank=True, null=True)
+    image_4 = OptimizedImageField(upload_to='car-collective/media/', blank=True, null=True)
+    image_5 = OptimizedImageField(upload_to='car-collective/media/', blank=True, null=True)
 
     mod_title_1 = models.CharField(max_length=40, blank=True, null=True)
     mod_description_1 = models.CharField(max_length=160, blank=True, null=True)
