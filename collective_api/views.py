@@ -1,9 +1,9 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from collective.models import Post, Like
+from collective.models import Post, Like, Comment
 from django.shortcuts import get_object_or_404
-from .serializers import PostSerializer, LikeSerializer
+from .serializers import PostSerializer, LikeSerializer, CommentSerializer
 from rest_framework.permissions import BasePermission, IsAuthenticatedOrReadOnly, SAFE_METHODS, IsAuthenticated, AllowAny
 
 class UserWritePermission(BasePermission):
@@ -100,3 +100,17 @@ class LikePost(APIView):
         else:
             Like.objects.filter(user=request.user, post=post).delete()
             return Response({'status': 'unliked'}, status=status.HTTP_200_OK)
+        
+
+
+class CommentPost(generics.ListCreateAPIView):
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class = CommentSerializer
+
+    def get_queryset(self):
+        post_id = self.kwargs['post_id']
+        return Comment.objects.filter(post__id=post_id)
+
+    def perform_create(self, serializer):
+        post = get_object_or_404(Post, id=self.kwargs['post_id'])
+        serializer.save(author=self.request.user, post=post)

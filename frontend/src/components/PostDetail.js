@@ -16,6 +16,7 @@ import DeleteButton from "../pages/posts/DeletePost";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { fetchPostDetail } from "../util/fetchPostDetail";
+import Comment from "./Comment";
 
 function PostDetail() {
   const { id } = useParams();
@@ -220,21 +221,8 @@ function PostDetail() {
           <p>{post.description}</p>
         </Col>
 
-        <Col md={4} className="comments-section">
-          <h4>Comments:</h4>
-          <div className="mb-3">
-            <strong>placeholder author:</strong> fake comment!
-          </div>
-          <div className="mb-3">
-            <strong>placeholder author:</strong> another comment!
-          </div>
-          <div className="mb-3">
-            <strong>placeholder author:</strong> oooo comment!
-          </div>
-        </Col>
+        <Comment postId={id} />
       </Row>
-
-      <Row></Row>
     </Container>
   );
 }

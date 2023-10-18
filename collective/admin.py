@@ -11,3 +11,6 @@ class AuthorAdmin(admin.ModelAdmin):
         return obj.likes.count()
 
 
+@admin.register(models.Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('post', 'author', 'content', 'timestamp')
