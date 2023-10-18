@@ -13,6 +13,7 @@ import fetchUsername from "./util/fetchUsername";
 import { logoutUser } from "./components/Logout";
 import CreatePost from "./pages/posts/CreatePost";
 import EditPost from "./pages/posts/EditPost";
+import UserProvider from "./components/UserProvider";
 
 function App() {
   const { PostList } = usePostList();
@@ -59,23 +60,25 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div>
-        <CollapsibleNav
-          isUserLoggedIn={isUserLoggedIn}
-          userName={userName}
-          handleLogout={handleLogout}
-        />
-        <Routes>
-          <Route path="/" element={<PostCards />} />
-          <Route path="/post/:id" element={<PostDetail />} />
-          <Route path="signin" element={<SignIn onLogin={handleLogin} />} />
-          <Route path="signup" element={<SignUp />} />
-          <Route path="newpost" element={<CreatePost />} />
-          <Route path="/editpost/:id" element={<EditPost />} />
-          <Route path="*" element={<h1>Page not found</h1>} />
-        </Routes>
-        <Footer />
-      </div>
+      <UserProvider>
+        <div>
+          <CollapsibleNav
+            isUserLoggedIn={isUserLoggedIn}
+            userName={userName}
+            handleLogout={handleLogout}
+          />
+          <Routes>
+            <Route path="/" element={<PostCards />} />
+            <Route path="/post/:id" element={<PostDetail />} />
+            <Route path="signin" element={<SignIn onLogin={handleLogin} />} />
+            <Route path="signup" element={<SignUp />} />
+            <Route path="newpost" element={<CreatePost />} />
+            <Route path="/editpost/:id" element={<EditPost />} />
+            <Route path="*" element={<h1>Page not found</h1>} />
+          </Routes>
+          <Footer />
+        </div>
+      </UserProvider>
     </BrowserRouter>
   );
 }

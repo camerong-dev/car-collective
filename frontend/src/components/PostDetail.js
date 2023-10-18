@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axiosInstance from "../api/axiosDefaults";
 import {
@@ -10,13 +10,13 @@ import {
   Modal,
 } from "react-bootstrap";
 import "../styles/PostDetail.css";
-import useCurrentUser from "../hooks/useCurrentUser";
 import { useNavigate } from "react-router-dom";
 import DeleteButton from "../pages/posts/DeletePost";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { fetchPostDetail } from "../util/fetchPostDetail";
 import Comment from "./Comment";
+import UserContext from "./UserContext";
 
 function PostDetail() {
   const { id } = useParams();
@@ -25,11 +25,9 @@ function PostDetail() {
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [currentImg, setCurrentImg] = useState("");
-  const { currentUser } = useCurrentUser();
+  const { currentUser } = useContext(UserContext);
   const navigate = useNavigate();
   const [liked, setLiked] = useState(false);
-
-  console.log(currentUser);
 
   const handleLike = () => {
     const heartIcon = document.querySelector(".heart-icon");

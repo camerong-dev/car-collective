@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axiosInstance from "../api/axiosDefaults";
 import { Col } from "react-bootstrap";
-import useCurrentUser from "../hooks/useCurrentUser";
+import UserContext from "./UserContext";
 
 const Comment = ({ postId }) => {
   const [comments, setComments] = useState([]);
   const [commentContent, setCommentContent] = useState("");
-  const { currentUser } = useCurrentUser();
+  const { currentUser } = useContext(UserContext);
 
   useEffect(() => {
     const fetchComments = async () => {
