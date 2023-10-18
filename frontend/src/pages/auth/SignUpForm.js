@@ -34,7 +34,6 @@ function SignUp() {
         }
       );
 
-      console.log("Registration is good", response.data);
       setSuccessMessage("Registration was successful! Please sign in.");
 
       setFirst_name("");

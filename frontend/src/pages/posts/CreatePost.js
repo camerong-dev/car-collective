@@ -3,6 +3,7 @@ import axiosInstance from "../../api/axiosDefaults";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import "../../styles/UserForms.css";
 import { isTokenExpired } from "../../util/isTokenExpired";
+import { useNavigate } from "react-router-dom";
 
 function CreatePost() {
   const [formData, setFormData] = useState({
@@ -35,6 +36,8 @@ function CreatePost() {
     image_4: null,
     image_5: null,
   });
+
+  const navigate = useNavigate();
 
   //Defining options for dropdown fields:
   const SHAPE_OPTIONS = ["Hatchback", "Saloon", "Estate", "SUV", "Convertible"];
@@ -74,7 +77,6 @@ function CreatePost() {
   const handleImageChange = (a) => {
     const file = a.target.files[0];
     const name = a.target.name;
-    console.log("File: ", file, "Name: ", name);
     setFormData((prevState) => ({
       ...prevState,
       [name]: file,
@@ -105,7 +107,7 @@ function CreatePost() {
             : null,
         },
       });
-      console.log(response.data);
+      navigate("/");
     } catch (error) {
       console.error("Error posting:", error);
       setError(error.message || "An error occurred");

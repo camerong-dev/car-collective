@@ -63,7 +63,7 @@ function PostDetail() {
       });
   }, [id]);
 
-  if (loading) return <div>Loading</div>;
+  if (loading) return <div>Loading...</div>;
   if (error) return <div>{error.message}</div>;
   if (!post) return <div>No post found</div>;
 
@@ -119,7 +119,6 @@ function PostDetail() {
         {comments.map((comment) => (
           <div key={comment.id} className="mb-3">
             <strong>{comment.author_name}:</strong> {comment.content}{" "}
-            {comment.timestamp}
           </div>
         ))}
         {currentUser && (

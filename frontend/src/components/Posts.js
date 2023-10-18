@@ -4,7 +4,6 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
 import { usePostList } from "../hooks/usePostList";
-import LoadingSpinner from "./LoadingSpinner.js";
 import "../styles/PostCards.css";
 import PaginationComponent from "./PaginationComponent";
 import { Link } from "react-router-dom";
@@ -24,7 +23,7 @@ function PostCards() {
   }, [isLoading]);
 
   if (loading) {
-    return <LoadingSpinner />;
+    return <div>Loading...</div>;
   }
 
   // Check if data is null
