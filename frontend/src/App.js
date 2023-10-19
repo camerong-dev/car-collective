@@ -1,61 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CollapsibleNav from "./components/NavBar";
 import Footer from "./components/Footer";
 import PostCards from "./components/Posts";
-import { usePostList } from "./hooks/usePostList";
 import SignIn from "./pages/auth/SignInForm";
 import SignUp from "./pages/auth/SignUpForm";
 import PostDetail from "./components/PostDetail";
-import jwtDecode from "jsonwebtoken/decode";
-import fetchUsername from "./util/fetchUsername";
-import { logoutUser } from "./components/Logout";
 import CreatePost from "./pages/posts/CreatePost";
 import EditPost from "./pages/posts/EditPost";
+import useUsername from "./hooks/useUsername";
 
 function App() {
-  const { PostList } = usePostList();
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
-  const [userName, setUserName] = useState("");
-  const [user_id, setUserId] = useState(null);
-
-  const handleLogin = (token) => {
-    const decodedToken = jwtDecode(token);
-    setIsUserLoggedIn(true);
-    setUserId(decodedToken.user_id);
-    fetchUsername(decodedToken.user_id)
-      .then((username) => {
-        setUserName(username);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
-  const handleLogout = () => {
-    logoutUser();
-    setUserId(null);
-    setUserName("");
-    setIsUserLoggedIn(false);
-  };
-
-  useEffect(() => {
-    const token = localStorage.getItem("access_token");
-
-    if (token) {
-      const decodedToken = jwtDecode(token);
-      setIsUserLoggedIn(true);
-      setUserId(decodedToken.user_id);
-      fetchUsername(decodedToken.user_id)
-        .then((username) => {
-          setUserName(username);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  }, []);
+  const { isUserLoggedIn, userName, handleLogout, handleLogin } = useUsername();
 
   return (
     <BrowserRouter>

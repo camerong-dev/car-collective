@@ -89,3 +89,11 @@ I used [Lucid chart](https://lucidchart.com/pages/) to create a data flow diagra
 ![Database](staticfiles/readme/models.png)
 
 [Back to top](#contents)
+
+### **Color Scheme**
+
+Main colours used throughout are listed below. I came across the blue color previously and liked it a lot. I used a basic light grey and white background to go with the blue in some areas, to make a clean and simple design. I prefer less colours as it can begin to look unorganised if too many are used.
+
+![Colour Pallette](staticfiles/readme/colour-pallete.png)
+
+[Back to top](#contents)

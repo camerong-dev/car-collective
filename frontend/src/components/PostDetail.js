@@ -22,13 +22,15 @@ import useComments from "../hooks/useComments";
 import Comment from "./Comments";
 
 function PostDetail() {
+  const { currentUser, fetchCurrentUser } = useCurrentUser();
   const { id } = useParams();
+  const { comments, addComment } = useComments(id);
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [currentImg, setCurrentImg] = useState("");
-  const { currentUser } = useCurrentUser();
+
   const navigate = useNavigate();
   const { liked, handleLike, handleUnlike } = useLike(id, currentUser);
   const [commentContent, setCommentContent] = useState("");
@@ -193,17 +195,18 @@ function PostDetail() {
             <Col>
               <FontAwesomeIcon icon={faHeart} className="heart-icon" />
               <span className="likes-count">{post.num_likes} Likes</span>
-              {currentUser ? (
+              {currentUser && (
                 <div>
                   <button
                     className="like-button"
                     title="Like Post"
-                    onClick={handleLike}
+                    onClick={liked ? handleUnlike : handleLike}
+                    disabled={loading}
                   >
-                    Like / Unlike Post
+                    {loading ? "Loading..." : liked ? "Unlike" : "Like"}
                   </button>
                 </div>
-              ) : null}
+              )}
             </Col>
           </Row>
         </Col>

@@ -72,9 +72,18 @@ class CurrentUserView(APIView):
 
     def get(self, request):
         if request.user.is_authenticated:
+
+            liked_posts = Like.objects.filter(user=request.user)
+            liked_posts_data = [
+                {
+                    'post_id': like.post.id,
+                }
+                for like in liked_posts
+            ]
             return Response({
                 'username': request.user.user_name,
                 'is_staff': request.user.is_staff,
+                'liked_posts': liked_posts_data,
             })
         else:
             return Response({"detail": "User not authenticated"}, status=status.HTTP_401_UNAUTHORIZED)
