@@ -29,6 +29,9 @@ Car-Collective is a site for car enthusiasts to come together and post their car
   - [Cloning](#cloning)
 - [Credits](#credits)
 
+### Project Goals
+In this project I want to create a simple to use, basic social media app. Where users can upload posts and others can interact with those posts.  I want to become more familar with React during this project.
+
 ## **User Experiences**
 
 ### **User Stories**
