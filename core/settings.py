@@ -36,7 +36,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "localhost:8000",
@@ -62,7 +62,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'accounts',
     'rest_framework_simplejwt.token_blacklist',
-    'image_optimizer'
+    'image_optimizer',
 ]
 
 MIDDLEWARE = [
