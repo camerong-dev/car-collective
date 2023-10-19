@@ -272,7 +272,7 @@ Main colours used throughout are listed below. I came across the blue color prev
 
 ## **Testing**
 
-The app was tested during and after development. Results can be found [here](TESTING.md)
+The app was tested during and after development. Results can be found [here](TESTING.md).  Known issues are listed within here.
 
 [Back to top](#contents)
 
