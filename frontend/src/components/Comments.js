@@ -21,8 +21,8 @@ const Comment = React.memo(
         <h4>Comments:</h4>
         {comments.map((comment) => (
           <div key={comment.id} className="mb-3">
-            <strong>{comment.author_name}:</strong> {comment.content}{" "}
-            {formatTimestamp(comment.timestamp)}
+            {formatTimestamp(comment.timestamp)} -
+            <strong> {comment.author_name}:</strong> {comment.content}{" "}
           </div>
         ))}
         {currentUser && (
