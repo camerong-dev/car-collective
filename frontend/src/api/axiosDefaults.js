@@ -1,7 +1,8 @@
 import axios from "axios";
 import getCsrfToken from "../util/getCsrfToken";
 
-const baseURL = "https://car-collective-8debc1088dd6.herokuapp.com/api";
+//const baseURL = "https://car-collective-8debc1088dd6.herokuapp.com/api";
+const baseURL = "http://127.0.0.1:8000/api";
 
 const axiosInstance = axios.create({
   baseURL: baseURL,
@@ -18,6 +19,10 @@ axiosInstance.interceptors.request.use((config) => {
   const csrfToken = getCsrfToken();
   if (csrfToken) {
     config.headers["X-CSRFToken"] = csrfToken;
+  }
+  const token = localStorage.getItem("access_token");
+  if (token) {
+    config.headers["Authorization"] = `Bearer ${token}`;
   }
   return config;
 });
