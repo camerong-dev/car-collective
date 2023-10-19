@@ -86,3 +86,4 @@ This project code was chekc with the ESLint, autopep8, plugin for VSCode during 
 - When you go to edit a post your 1st original image isn't saved so you must reupload it otherwise an error is thrown
 - Errors are thrown when you try to upload images which are high resolution / around 5MB in size, which doesn't allow you to create or edit a post. TinyPNG has been setup to optimize the images, but some which should meet the requirements still don't work.  In testing if I manually pass in failing pictures into TinyPNG.  The new output images are uploaded with no problems.
 - Manifest.json throws a syntax error on line 1,  this seems to have no affect on end user
+- When you go to edit a post with the max number of mods,  you won't see them until click 'add mod' until all 5 are visible. 
