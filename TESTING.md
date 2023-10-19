@@ -80,3 +80,9 @@
 ### Validators
 
 This project code was chekc with the ESLint, autopep8, plugin for VSCode during development. No warnings are present for the production version.
+
+### Known Issues
+
+- When you go to edit a post your 1st original image isn't saved so you must reupload it otherwise an error is thrown
+- Errors are thrown when you try to upload images which are high resolution, error handling has been put in place for this
+- Manifest.json throws a syntax error on line 1,  this seems to have no affect on end user
