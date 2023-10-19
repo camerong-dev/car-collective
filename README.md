@@ -393,7 +393,7 @@ The STATIC section of settings.py should resemble the following image:
 - The home page uses bootstraps 'kitchen sink' which have been modified, can be found [here](https://react-bootstrap.github.io/docs/components/cards#kitchen-sink)
 - [FontAwesome](https://fontawesome.com/) for the icons I used
 - To setup my custom user model I used this [video](https://www.youtube.com/watch?v=Ae7nc1EGv-A&t=297s)
-- To get me going with my Permissions i used this [video](https://www.youtube.com/watch?v=5AOn0BmSXyE&list=PLOLrQ9Pn6caw0PjVwymNc64NkUNbZlhFw&index=2&t=1928s), I have built on top of this massively
+- To get me going with my Permissions i used this [video](https://www.youtube.com/watch?v=5AOn0BmSXyE&list=PLOLrQ9Pn6caw0PjVwymNc64NkUNbZlhFw&index=2&t=1928s)
 - Colleagues at work helping me debug issues and give solutions where needed
 
 - Utulized the CI walkthrough project 'Moments' as a very loose guide
