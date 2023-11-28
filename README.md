@@ -6,6 +6,9 @@ Car-Collective is a site for car enthusiasts to come together and post their car
 
 [Car-Collective](https://car-collective-8debc1088dd6.herokuapp.com/)
 
+## Grade
+Grade PASS
+
 ## Contents
 
 - [User Experiences](#user-experence)
